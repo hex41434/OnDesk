@@ -78,7 +78,7 @@ label.field {
   margin-bottom: 0.45rem;
 }
 
-input[type="text"], input[type="search"] {
+input[type="text"], input[type="search"], input[type="password"] {
   width: 100%;
   background: var(--bg);
   border: 1px solid var(--line);
@@ -119,18 +119,80 @@ input:focus {
   padding: 0;
   border: 1px solid var(--line);
   background: var(--bg);
+  max-height: 16rem;
+  overflow-y: auto;
 }
-.suggest li button {
+.suggest li { margin: 0; }
+.hw-option {
   width: 100%;
   text-align: left;
   background: none;
   border: 0;
   color: var(--ink);
   font: inherit;
-  padding: 0.4rem 0.65rem;
+  padding: 0.5rem 0.65rem;
   cursor: pointer;
 }
-.suggest li button:hover { background: var(--bg-2); }
+.hw-option:hover,
+.hw-option.on { background: var(--bg-2); }
+.hw-name,
+.hw-spec {
+  display: block;
+}
+.hw-name { font-weight: 500; line-height: 1.3; }
+.hw-spec {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.35;
+  margin: 0.15rem 0 0;
+}
+.hw-spec.picked { margin: 0.4rem 0 0; }
+
+.hw-picker { position: relative; }
+.hw-input-wrap { position: relative; }
+.hw-input-wrap input { padding-right: 2rem; }
+.hw-close {
+  position: absolute;
+  right: 0.35rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.hw-close:hover { color: var(--ink); }
+
+.ref { color: var(--accent); font-weight: 600; }
+
+.search-hits {
+  list-style: none;
+  margin: 0.45rem 0 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  max-height: 14rem;
+  overflow-y: auto;
+}
+.search-hits li { margin: 0; }
+.search-hits button {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  font: inherit;
+  padding: 0.45rem 0.65rem;
+  cursor: pointer;
+}
+.search-hits button:hover { background: var(--bg-2); }
+.search-hits .hw-spec { margin: 0.1rem 0 0; }
 
 table.results {
   width: 100%;
@@ -188,4 +250,20 @@ table.results tr:hover td { background: #201d17; }
 }
 
 .error { color: var(--no); font-size: 0.9rem; }
-.meta { color: var(--muted); font-size: 0.85rem; }
+.meta { color: var(--muted); font-size: 0.85rem; margin: 0.55rem 0 0.7rem; }
+
+.table-bar { margin: 0.2rem 0 0.4rem; }
+.chip-gap {
+  display: inline-block;
+  width: 0.6rem;
+}
+
+table.results tr.pasted td { background: #241f16; }
+table.results tr.math-row td {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.85rem;
+}
+table.results tr.math-row .hint { margin: 0.25rem 0 0; display: block; }

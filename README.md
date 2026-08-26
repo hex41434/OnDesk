@@ -16,7 +16,7 @@ npm test          # scoring engine
 npm run dev       # http://localhost:3000
 ```
 
-Requires Node 20+.
+Requires Node 20+. Optional smart search: put `GEMINI_API_KEY` in `apps/web/.env.local`, or paste it under **Settings** (not on the Fit page). Numbers still come from `fit()`, never from Gemini.
 
 ## What you get
 

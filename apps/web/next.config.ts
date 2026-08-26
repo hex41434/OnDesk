@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  devIndicators: false,
   transpilePackages: ["@ondesk/core"],
   webpack: (config) => {
     config.resolve.extensionAlias = {

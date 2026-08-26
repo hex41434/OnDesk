@@ -1,13 +1,18 @@
-# Graph Report - fitwatch  (2026-08-25)
+# Graph Report - fitwatch  (2026-08-27)
 
 ## Corpus Check
-- 34 files · ~14,820 words
+- 39 files · ~16,418 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 216 nodes · 317 edges · 21 communities (18 shown, 3 thin omitted)
-- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 3 edges (avg confidence: 0.8)
+- 236 nodes · 352 edges · 22 communities (19 shown, 3 thin omitted)
+- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 5 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `e1ede0e3`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - [[_COMMUNITY_Community 0|Community 0]]
@@ -27,6 +32,7 @@
 - [[_COMMUNITY_Community 14|Community 14]]
 - [[_COMMUNITY_Community 15|Community 15]]
 - [[_COMMUNITY_Community 17|Community 17]]
+- [[_COMMUNITY_Community 21|Community 21]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `OnDesk` - 16 edges
@@ -38,36 +44,36 @@
 7. `modelFromHub()` - 7 edges
 8. `Hardware` - 7 edges
 9. `Model` - 7 edges
-10. `rank()` - 6 edges
+10. `findHardware()` - 6 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Desk()` --calls--> `fit()`  [INFERRED]
-  apps/web/app/desk.tsx → packages/core/src/fit.ts
 - `GET()` --calls--> `modelFromHub()`  [INFERRED]
   apps/web/app/api/hf/route.ts → packages/core/src/hub.ts
+- `POST()` --calls--> `findHardware()`  [INFERRED]
+  apps/web/app/api/search-hardware/route.ts → packages/core/src/hardware.ts
+- `Desk()` --calls--> `fit()`  [INFERRED]
+  apps/web/app/desk.tsx → packages/core/src/fit.ts
 - `GET()` --calls--> `parseHfRepo()`  [INFERRED]
   apps/web/app/api/hf/route.ts → packages/core/src/hub.ts
-- `scoreQuant()` --calls--> `availableGb()`  [EXTRACTED]
-  packages/core/src/fit.ts → packages/core/src/memory.ts
-- `scoreQuant()` --calls--> `bandFor()`  [EXTRACTED]
-  packages/core/src/fit.ts → packages/core/src/memory.ts
+- `hubSearch()` --calls--> `parseHfRepo()`  [INFERRED]
+  apps/web/app/api/search-models/route.ts → packages/core/src/hub.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (21 total, 3 thin omitted)
+## Communities (22 total, 3 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.13
-Nodes (30): GET(), fit(), quantsFor(), archFromConfig(), kindAndJobs(), modelFromHub(), paramsFromCard(), parseHfRepo() (+22 more)
+Nodes (28): gpus, models, archFromConfig(), kindAndJobs(), modelFromHub(), paramsFromCard(), Intent, JOB_WORDS (+20 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.10
 Nodes (20): Four-week ship plan, How scoring should work (honest, explainable), Later, if it has a pulse, Name, Next concrete step, OnDesk, One-liner, Open source, on purpose (+12 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.19
-Nodes (17): extraGb(), scoreQuant(), SPEED_EFFICIENCY, availableGb(), bandFor(), kvCacheGb(), overheadGb(), QUANT_LADDER (+9 more)
+Cohesion: 0.17
+Nodes (20): extraGb(), fit(), quantsFor(), scoreQuant(), SPEED_EFFICIENCY, availableGb(), bandFor(), BITS_PER_WEIGHT (+12 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.11
@@ -90,16 +96,16 @@ Cohesion: 0.15
 Nodes (12): compilerOptions, esModuleInterop, isolatedModules, lib, module, moduleResolution, noEmit, noUncheckedIndexedAccess (+4 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.23
-Nodes (7): gpus, models, findHardware(), hardwareById(), norm(), tokens(), Hardware
+Cohesion: 0.70
+Nodes (4): findHardware(), hardwareById(), norm(), tokens()
 
 ### Community 9 - "Community 9"
 Cohesion: 0.17
 Nodes (11): compilerOptions, allowJs, incremental, jsx, lib, paths, plugins, exclude (+3 more)
 
 ### Community 10 - "Community 10"
-Cohesion: 0.43
-Nodes (4): Desk(), hfUrl(), JOBS, sizeLabel()
+Cohesion: 0.22
+Nodes (5): Desk(), JOBS, sizeLabel(), jsonAuthHeaders(), readBrowserKey()
 
 ### Community 11 - "Community 11"
 Cohesion: 0.33
@@ -113,25 +119,29 @@ Nodes (3): Entry, Week, weeks
 Cohesion: 0.33
 Nodes (5): License, OnDesk, Quick start, Repo, What you get
 
+### Community 21 - "Community 21"
+Cohesion: 0.21
+Nodes (13): GET(), extractJsonObject(), GEMINI_MODELS, geminiJson(), JOBS, mapHardwareQuery(), mapModelQuery(), resolveGeminiKey() (+5 more)
+
 ## Knowledge Gaps
-- **113 isolated node(s):** `JOBS`, `Entry`, `Week`, `weeks`, `plex` (+108 more)
+- **116 isolated node(s):** `HubHit`, `JOBS`, `Entry`, `Week`, `weeks` (+111 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `fit()` connect `Community 0` to `Community 10`, `Community 2`?**
-  _High betweenness centrality (0.022) - this node is a cross-community bridge._
-- **Why does `Desk()` connect `Community 10` to `Community 0`?**
-  _High betweenness centrality (0.018) - this node is a cross-community bridge._
-- **What connects `JOBS`, `Entry`, `Week` to the rest of the system?**
-  _113 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `fit()` connect `Community 2` to `Community 0`, `Community 10`?**
+  _High betweenness centrality (0.040) - this node is a cross-community bridge._
+- **Why does `Desk()` connect `Community 10` to `Community 2`?**
+  _High betweenness centrality (0.036) - this node is a cross-community bridge._
+- **Why does `findHardware()` connect `Community 8` to `Community 0`, `Community 2`, `Community 21`?**
+  _High betweenness centrality (0.025) - this node is a cross-community bridge._
+- **What connects `HubHit`, `JOBS`, `Entry` to the rest of the system?**
+  _116 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.1253968253968254 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.12912912912912913 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
 - **Should `Community 3` be split into smaller, more focused modules?**
   _Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected._
-- **Should `Community 4` be split into smaller, more focused modules?**
-  _Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected._
