@@ -1,0 +1,20 @@
+{
+  "name": "ondesk",
+  "private": true,
+  "version": "0.1.0",
+  "description": "What fits on the desk. Not in the cloud.",
+  "workspaces": [
+    "apps/web",
+    "packages/core"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @ondesk/web",
+    "build": "npm run build -w @ondesk/web",
+    "test": "npm test -w @ondesk/core",
+    "typecheck": "npm run typecheck -w @ondesk/core && npm run typecheck -w @ondesk/web"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

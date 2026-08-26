@@ -1,0 +1,2259 @@
+[
+  {
+    "id": "qwen2.5-0.5b",
+    "name": "Qwen2.5 0.5B Instruct",
+    "paramsB": 0.49,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen2.5-0.5B-Instruct",
+    "arch": {
+      "nLayers": 24,
+      "nKvHeads": 2,
+      "headDim": 64
+    }
+  },
+  {
+    "id": "qwen2.5-1.5b",
+    "name": "Qwen2.5 1.5B Instruct",
+    "paramsB": 1.54,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen2.5-1.5B-Instruct",
+    "arch": {
+      "nLayers": 28,
+      "nKvHeads": 2,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "qwen2.5-3b",
+    "name": "Qwen2.5 3B Instruct",
+    "paramsB": 3.09,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen2.5-3B-Instruct",
+    "arch": {
+      "nLayers": 36,
+      "nKvHeads": 2,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "qwen2.5-7b",
+    "name": "Qwen2.5 7B Instruct",
+    "paramsB": 7.62,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen2.5-7B-Instruct",
+    "arch": {
+      "nLayers": 28,
+      "nKvHeads": 4,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "qwen2.5-14b",
+    "name": "Qwen2.5 14B Instruct",
+    "paramsB": 14.7,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen2.5-14B-Instruct",
+    "arch": {
+      "nLayers": 48,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "qwen2.5-32b",
+    "name": "Qwen2.5 32B Instruct",
+    "paramsB": 32.8,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen2.5-32B-Instruct",
+    "arch": {
+      "nLayers": 64,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "qwen2.5-72b",
+    "name": "Qwen2.5 72B Instruct",
+    "paramsB": 72.7,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen2.5-72B-Instruct",
+    "arch": {
+      "nLayers": 80,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "qwen2.5-coder-1.5b",
+    "name": "Qwen2.5 Coder 1.5B",
+    "paramsB": 1.54,
+    "kind": "llm",
+    "jobs": [
+      "coding",
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+    "arch": {
+      "nLayers": 28,
+      "nKvHeads": 2,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "qwen2.5-coder-3b",
+    "name": "Qwen2.5 Coder 3B",
+    "paramsB": 3.09,
+    "kind": "llm",
+    "jobs": [
+      "coding",
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen2.5-Coder-3B-Instruct",
+    "arch": {
+      "nLayers": 36,
+      "nKvHeads": 2,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "qwen2.5-coder-7b",
+    "name": "Qwen2.5 Coder 7B",
+    "paramsB": 7.62,
+    "kind": "llm",
+    "jobs": [
+      "coding",
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen2.5-Coder-7B-Instruct",
+    "arch": {
+      "nLayers": 28,
+      "nKvHeads": 4,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "qwen2.5-coder-14b",
+    "name": "Qwen2.5 Coder 14B",
+    "paramsB": 14.7,
+    "kind": "llm",
+    "jobs": [
+      "coding",
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen2.5-Coder-14B-Instruct",
+    "arch": {
+      "nLayers": 48,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "qwen2.5-coder-32b",
+    "name": "Qwen2.5 Coder 32B",
+    "paramsB": 32.8,
+    "kind": "llm",
+    "jobs": [
+      "coding",
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen2.5-Coder-32B-Instruct",
+    "arch": {
+      "nLayers": 64,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "qwen2.5-vl-3b",
+    "name": "Qwen2.5 VL 3B Instruct",
+    "paramsB": 3.75,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen2.5-VL-3B-Instruct",
+    "arch": {
+      "nLayers": 36,
+      "nKvHeads": 2,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "qwen2.5-vl-7b",
+    "name": "Qwen2.5 VL 7B Instruct",
+    "paramsB": 8.29,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "arch": {
+      "nLayers": 28,
+      "nKvHeads": 4,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "qwen2.5-vl-32b",
+    "name": "Qwen2.5 VL 32B Instruct",
+    "paramsB": 33.0,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen2.5-VL-32B-Instruct",
+    "arch": {
+      "nLayers": 64,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "qwen2.5-vl-72b",
+    "name": "Qwen2.5 VL 72B Instruct",
+    "paramsB": 73.4,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen2.5-VL-72B-Instruct",
+    "arch": {
+      "nLayers": 80,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "qwen3-1.7b",
+    "name": "Qwen3 1.7B",
+    "paramsB": 1.7,
+    "kind": "llm",
+    "jobs": [
+      "chat",
+      "reasoning"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen3-1.7B",
+    "arch": {
+      "nLayers": 28,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "qwen3-4b",
+    "name": "Qwen3 4B",
+    "paramsB": 4.0,
+    "kind": "llm",
+    "jobs": [
+      "chat",
+      "reasoning"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen3-4B",
+    "arch": {
+      "nLayers": 36,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "qwen3-8b",
+    "name": "Qwen3 8B",
+    "paramsB": 8.2,
+    "kind": "llm",
+    "jobs": [
+      "chat",
+      "reasoning"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen3-8B",
+    "arch": {
+      "nLayers": 36,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "qwen3-14b",
+    "name": "Qwen3 14B",
+    "paramsB": 14.8,
+    "kind": "llm",
+    "jobs": [
+      "chat",
+      "reasoning"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen3-14B",
+    "arch": {
+      "nLayers": 40,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "qwen3-32b",
+    "name": "Qwen3 32B",
+    "paramsB": 32.8,
+    "kind": "llm",
+    "jobs": [
+      "chat",
+      "reasoning"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Qwen/Qwen3-32B",
+    "arch": {
+      "nLayers": 64,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "llama-3.2-1b",
+    "name": "Llama 3.2 1B Instruct",
+    "paramsB": 1.24,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "llama3.2",
+    "gguf": true,
+    "hf": "meta-llama/Llama-3.2-1B-Instruct",
+    "arch": {
+      "nLayers": 16,
+      "nKvHeads": 8,
+      "headDim": 64
+    }
+  },
+  {
+    "id": "llama-3.2-3b",
+    "name": "Llama 3.2 3B Instruct",
+    "paramsB": 3.21,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "llama3.2",
+    "gguf": true,
+    "hf": "meta-llama/Llama-3.2-3B-Instruct",
+    "arch": {
+      "nLayers": 28,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "llama-3.1-8b",
+    "name": "Llama 3.1 8B Instruct",
+    "paramsB": 8.03,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "llama3.1",
+    "gguf": true,
+    "hf": "meta-llama/Llama-3.1-8B-Instruct",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "llama-3.1-70b",
+    "name": "Llama 3.1 70B Instruct",
+    "paramsB": 70.6,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "llama3.1",
+    "gguf": true,
+    "hf": "meta-llama/Llama-3.1-70B-Instruct",
+    "arch": {
+      "nLayers": 80,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "llama-3.1-405b",
+    "name": "Llama 3.1 405B Instruct",
+    "paramsB": 405.0,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "llama3.1",
+    "gguf": true,
+    "hf": "meta-llama/Llama-3.1-405B-Instruct",
+    "arch": {
+      "nLayers": 126,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "llama-3.3-70b",
+    "name": "Llama 3.3 70B Instruct",
+    "paramsB": 70.6,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "llama3.3",
+    "gguf": true,
+    "hf": "meta-llama/Llama-3.3-70B-Instruct",
+    "arch": {
+      "nLayers": 80,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "llama-3.2-11b-vision",
+    "name": "Llama 3.2 11B Vision",
+    "paramsB": 10.6,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "llama3.2",
+    "gguf": true,
+    "hf": "meta-llama/Llama-3.2-11B-Vision-Instruct",
+    "arch": {
+      "nLayers": 40,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "llama-3.2-90b-vision",
+    "name": "Llama 3.2 90B Vision",
+    "paramsB": 88.6,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "llama3.2",
+    "gguf": true,
+    "hf": "meta-llama/Llama-3.2-90B-Vision-Instruct",
+    "arch": {
+      "nLayers": 100,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "mistral-7b",
+    "name": "Mistral 7B Instruct v0.3",
+    "paramsB": 7.25,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "mistralai/Mistral-7B-Instruct-v0.3",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "mistral-nemo",
+    "name": "Mistral Nemo 12B",
+    "paramsB": 12.2,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "mistralai/Mistral-Nemo-Instruct-2407",
+    "arch": {
+      "nLayers": 40,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "mistral-small-24b",
+    "name": "Mistral Small 24B",
+    "paramsB": 23.6,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "mistralai/Mistral-Small-24B-Instruct-2501",
+    "arch": {
+      "nLayers": 40,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "mixtral-8x7b",
+    "name": "Mixtral 8x7B Instruct",
+    "paramsB": 46.7,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "mistralai/Mixtral-8x7B-Instruct-v0.1",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "mixtral-8x22b",
+    "name": "Mixtral 8x22B Instruct",
+    "paramsB": 141.0,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "mistralai/Mixtral-8x22B-Instruct-v0.1",
+    "arch": {
+      "nLayers": 56,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "codestral-22b",
+    "name": "Codestral 22B",
+    "paramsB": 22.2,
+    "kind": "llm",
+    "jobs": [
+      "coding"
+    ],
+    "license": "mistral-non-prod",
+    "gguf": true,
+    "hf": "mistralai/Codestral-22B-v0.1",
+    "arch": {
+      "nLayers": 56,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "pixtral-12b",
+    "name": "Pixtral 12B",
+    "paramsB": 12.4,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "mistralai/Pixtral-12B-2409",
+    "arch": {
+      "nLayers": 40,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "gemma-2-2b",
+    "name": "Gemma 2 2B Instruct",
+    "paramsB": 2.61,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "gemma",
+    "gguf": true,
+    "hf": "google/gemma-2-2b-it",
+    "arch": {
+      "nLayers": 26,
+      "nKvHeads": 4,
+      "headDim": 256
+    }
+  },
+  {
+    "id": "gemma-2-9b",
+    "name": "Gemma 2 9B Instruct",
+    "paramsB": 9.24,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "gemma",
+    "gguf": true,
+    "hf": "google/gemma-2-9b-it",
+    "arch": {
+      "nLayers": 42,
+      "nKvHeads": 8,
+      "headDim": 256
+    }
+  },
+  {
+    "id": "gemma-2-27b",
+    "name": "Gemma 2 27B Instruct",
+    "paramsB": 27.2,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "gemma",
+    "gguf": true,
+    "hf": "google/gemma-2-27b-it",
+    "arch": {
+      "nLayers": 46,
+      "nKvHeads": 16,
+      "headDim": 256
+    }
+  },
+  {
+    "id": "gemma-3-1b",
+    "name": "Gemma 3 1B Instruct",
+    "paramsB": 1.0,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "gemma",
+    "gguf": true,
+    "hf": "google/gemma-3-1b-it",
+    "arch": {
+      "nLayers": 26,
+      "nKvHeads": 1,
+      "headDim": 256
+    }
+  },
+  {
+    "id": "gemma-3-4b",
+    "name": "Gemma 3 4B Instruct",
+    "paramsB": 4.3,
+    "kind": "vlm",
+    "jobs": [
+      "vision",
+      "chat"
+    ],
+    "license": "gemma",
+    "gguf": true,
+    "hf": "google/gemma-3-4b-it",
+    "arch": {
+      "nLayers": 34,
+      "nKvHeads": 4,
+      "headDim": 256
+    }
+  },
+  {
+    "id": "gemma-3-12b",
+    "name": "Gemma 3 12B Instruct",
+    "paramsB": 12.2,
+    "kind": "vlm",
+    "jobs": [
+      "vision",
+      "chat"
+    ],
+    "license": "gemma",
+    "gguf": true,
+    "hf": "google/gemma-3-12b-it",
+    "arch": {
+      "nLayers": 48,
+      "nKvHeads": 8,
+      "headDim": 256
+    }
+  },
+  {
+    "id": "gemma-3-27b",
+    "name": "Gemma 3 27B Instruct",
+    "paramsB": 27.4,
+    "kind": "vlm",
+    "jobs": [
+      "vision",
+      "chat"
+    ],
+    "license": "gemma",
+    "gguf": true,
+    "hf": "google/gemma-3-27b-it",
+    "arch": {
+      "nLayers": 62,
+      "nKvHeads": 16,
+      "headDim": 256
+    }
+  },
+  {
+    "id": "phi-3-mini",
+    "name": "Phi-3 Mini 3.8B Instruct",
+    "paramsB": 3.82,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "microsoft/Phi-3-mini-4k-instruct",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 32,
+      "headDim": 96
+    }
+  },
+  {
+    "id": "phi-3-medium",
+    "name": "Phi-3 Medium 14B Instruct",
+    "paramsB": 14.0,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "microsoft/Phi-3-medium-4k-instruct",
+    "arch": {
+      "nLayers": 40,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "phi-3.5-mini",
+    "name": "Phi-3.5 Mini Instruct",
+    "paramsB": 3.82,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "microsoft/Phi-3.5-mini-instruct",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 32,
+      "headDim": 96
+    }
+  },
+  {
+    "id": "phi-3.5-vision",
+    "name": "Phi-3.5 Vision Instruct",
+    "paramsB": 4.15,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "microsoft/Phi-3.5-vision-instruct",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 32,
+      "headDim": 96
+    }
+  },
+  {
+    "id": "phi-4",
+    "name": "Phi-4 14B",
+    "paramsB": 14.7,
+    "kind": "llm",
+    "jobs": [
+      "chat",
+      "reasoning"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "microsoft/phi-4",
+    "arch": {
+      "nLayers": 40,
+      "nKvHeads": 10,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "phi-4-mini",
+    "name": "Phi-4 Mini 3.8B",
+    "paramsB": 3.84,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "microsoft/Phi-4-mini-instruct",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "deepseek-r1-distill-qwen-1.5b",
+    "name": "DeepSeek R1 Distill Qwen 1.5B",
+    "paramsB": 1.54,
+    "kind": "llm",
+    "jobs": [
+      "reasoning",
+      "chat"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
+    "arch": {
+      "nLayers": 28,
+      "nKvHeads": 2,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "deepseek-r1-distill-qwen-7b",
+    "name": "DeepSeek R1 Distill Qwen 7B",
+    "paramsB": 7.62,
+    "kind": "llm",
+    "jobs": [
+      "reasoning",
+      "chat"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+    "arch": {
+      "nLayers": 28,
+      "nKvHeads": 4,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "deepseek-r1-distill-llama-8b",
+    "name": "DeepSeek R1 Distill Llama 8B",
+    "paramsB": 8.03,
+    "kind": "llm",
+    "jobs": [
+      "reasoning",
+      "chat"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "deepseek-r1-distill-qwen-14b",
+    "name": "DeepSeek R1 Distill Qwen 14B",
+    "paramsB": 14.8,
+    "kind": "llm",
+    "jobs": [
+      "reasoning",
+      "chat"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+    "arch": {
+      "nLayers": 48,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "deepseek-r1-distill-qwen-32b",
+    "name": "DeepSeek R1 Distill Qwen 32B",
+    "paramsB": 32.8,
+    "kind": "llm",
+    "jobs": [
+      "reasoning",
+      "chat"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+    "arch": {
+      "nLayers": 64,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "deepseek-r1-distill-llama-70b",
+    "name": "DeepSeek R1 Distill Llama 70B",
+    "paramsB": 70.6,
+    "kind": "llm",
+    "jobs": [
+      "reasoning",
+      "chat"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "deepseek-ai/DeepSeek-R1-Distill-Llama-70B",
+    "arch": {
+      "nLayers": 80,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "deepseek-coder-6.7b",
+    "name": "DeepSeek Coder 6.7B Instruct",
+    "paramsB": 6.74,
+    "kind": "llm",
+    "jobs": [
+      "coding"
+    ],
+    "license": "deepseek",
+    "gguf": true,
+    "hf": "deepseek-ai/deepseek-coder-6.7b-instruct",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 32,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "deepseek-coder-33b",
+    "name": "DeepSeek Coder 33B Instruct",
+    "paramsB": 33.3,
+    "kind": "llm",
+    "jobs": [
+      "coding"
+    ],
+    "license": "deepseek",
+    "gguf": true,
+    "hf": "deepseek-ai/deepseek-coder-33b-instruct",
+    "arch": {
+      "nLayers": 62,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "deepseek-v2-lite",
+    "name": "DeepSeek V2 Lite Chat",
+    "paramsB": 15.7,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "deepseek",
+    "gguf": true,
+    "hf": "deepseek-ai/DeepSeek-V2-Lite-Chat",
+    "arch": {
+      "nLayers": 27,
+      "nKvHeads": 4,
+      "headDim": 192
+    }
+  },
+  {
+    "id": "deepseek-v3",
+    "name": "DeepSeek V3",
+    "paramsB": 671.0,
+    "kind": "llm",
+    "jobs": [
+      "chat",
+      "reasoning"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "deepseek-ai/DeepSeek-V3",
+    "arch": {
+      "nLayers": 61,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "deepseek-r1",
+    "name": "DeepSeek R1",
+    "paramsB": 671.0,
+    "kind": "llm",
+    "jobs": [
+      "reasoning",
+      "chat"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "deepseek-ai/DeepSeek-R1",
+    "arch": {
+      "nLayers": 61,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "yi-1.5-6b",
+    "name": "Yi 1.5 6B Chat",
+    "paramsB": 6.06,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "01-ai/Yi-1.5-6B-Chat",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 4,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "yi-1.5-9b",
+    "name": "Yi 1.5 9B Chat",
+    "paramsB": 8.83,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "01-ai/Yi-1.5-9B-Chat",
+    "arch": {
+      "nLayers": 48,
+      "nKvHeads": 4,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "yi-1.5-34b",
+    "name": "Yi 1.5 34B Chat",
+    "paramsB": 34.4,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "01-ai/Yi-1.5-34B-Chat",
+    "arch": {
+      "nLayers": 60,
+      "nKvHeads": 4,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "command-r",
+    "name": "Command R 35B",
+    "paramsB": 35.0,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "cc-by-nc-4.0",
+    "gguf": true,
+    "hf": "CohereForAI/c4ai-command-r-v01",
+    "arch": {
+      "nLayers": 40,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "command-r-plus",
+    "name": "Command R+ 104B",
+    "paramsB": 104.0,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "cc-by-nc-4.0",
+    "gguf": true,
+    "hf": "CohereForAI/c4ai-command-r-plus",
+    "arch": {
+      "nLayers": 64,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "nemotron-mini",
+    "name": "Nemotron Mini 4B",
+    "paramsB": 4.19,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "nvidia-open-model",
+    "gguf": true,
+    "hf": "nvidia/Llama-3.1-Nemotron-Nano-4B-v1.1",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "olmo-2-7b",
+    "name": "OLMo 2 7B Instruct",
+    "paramsB": 7.3,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "allenai/OLMo-2-1124-7B-Instruct",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "olmo-2-13b",
+    "name": "OLMo 2 13B Instruct",
+    "paramsB": 13.7,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "allenai/OLMo-2-1124-13B-Instruct",
+    "arch": {
+      "nLayers": 40,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "smollm2-1.7b",
+    "name": "SmolLM2 1.7B Instruct",
+    "paramsB": 1.71,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+    "arch": {
+      "nLayers": 24,
+      "nKvHeads": 4,
+      "headDim": 64
+    }
+  },
+  {
+    "id": "tinyllama-1.1b",
+    "name": "TinyLlama 1.1B Chat",
+    "paramsB": 1.1,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+    "arch": {
+      "nLayers": 22,
+      "nKvHeads": 4,
+      "headDim": 64
+    }
+  },
+  {
+    "id": "stablelm-2-12b",
+    "name": "Stable LM 2 12B Chat",
+    "paramsB": 12.1,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "stablilm",
+    "gguf": true,
+    "hf": "stabilityai/stablelm-2-12b-chat",
+    "arch": {
+      "nLayers": 40,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "zephyr-7b",
+    "name": "Zephyr 7B Beta",
+    "paramsB": 7.24,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "HuggingFaceH4/zephyr-7b-beta",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "openhermes-2.5-7b",
+    "name": "OpenHermes 2.5 7B",
+    "paramsB": 7.24,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "teknium/OpenHermes-2.5-Mistral-7B",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "solar-10.7b",
+    "name": "SOLAR 10.7B Instruct",
+    "paramsB": 10.7,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "upstage/SOLAR-10.7B-Instruct-v1.0",
+    "arch": {
+      "nLayers": 48,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "aya-23-8b",
+    "name": "Aya 23 8B",
+    "paramsB": 8.03,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "cc-by-nc-4.0",
+    "gguf": true,
+    "hf": "CohereForAI/aya-23-8B",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "aya-expanse-8b",
+    "name": "Aya Expanse 8B",
+    "paramsB": 8.03,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "cc-by-nc-4.0",
+    "gguf": true,
+    "hf": "CohereForAI/aya-expanse-8b",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "aya-expanse-32b",
+    "name": "Aya Expanse 32B",
+    "paramsB": 32.3,
+    "kind": "llm",
+    "jobs": [
+      "chat"
+    ],
+    "license": "cc-by-nc-4.0",
+    "gguf": true,
+    "hf": "CohereForAI/aya-expanse-32b",
+    "arch": {
+      "nLayers": 64,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "starcoder2-3b",
+    "name": "StarCoder2 3B",
+    "paramsB": 3.03,
+    "kind": "llm",
+    "jobs": [
+      "coding"
+    ],
+    "license": "bigcode-openrail-m",
+    "gguf": true,
+    "hf": "bigcode/starcoder2-3b",
+    "arch": {
+      "nLayers": 30,
+      "nKvHeads": 4,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "starcoder2-7b",
+    "name": "StarCoder2 7B",
+    "paramsB": 7.17,
+    "kind": "llm",
+    "jobs": [
+      "coding"
+    ],
+    "license": "bigcode-openrail-m",
+    "gguf": true,
+    "hf": "bigcode/starcoder2-7b",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 4,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "starcoder2-15b",
+    "name": "StarCoder2 15B",
+    "paramsB": 15.5,
+    "kind": "llm",
+    "jobs": [
+      "coding"
+    ],
+    "license": "bigcode-openrail-m",
+    "gguf": true,
+    "hf": "bigcode/starcoder2-15b",
+    "arch": {
+      "nLayers": 40,
+      "nKvHeads": 4,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "codegemma-7b",
+    "name": "CodeGemma 7B Instruct",
+    "paramsB": 8.54,
+    "kind": "llm",
+    "jobs": [
+      "coding"
+    ],
+    "license": "gemma",
+    "gguf": true,
+    "hf": "google/codegemma-7b-it",
+    "arch": {
+      "nLayers": 28,
+      "nKvHeads": 4,
+      "headDim": 256
+    }
+  },
+  {
+    "id": "granite-3.1-8b",
+    "name": "Granite 3.1 8B Instruct",
+    "paramsB": 8.1,
+    "kind": "llm",
+    "jobs": [
+      "chat",
+      "coding"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "ibm-granite/granite-3.1-8b-instruct",
+    "arch": {
+      "nLayers": 40,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "granite-code-8b",
+    "name": "Granite Code 8B Instruct",
+    "paramsB": 8.05,
+    "kind": "llm",
+    "jobs": [
+      "coding"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "ibm-granite/granite-8b-code-instruct-128k",
+    "arch": {
+      "nLayers": 36,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "llava-1.6-7b",
+    "name": "LLaVA 1.6 Mistral 7B",
+    "paramsB": 7.57,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "llava-hf/llava-v1.6-mistral-7b-hf",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "llava-1.6-13b",
+    "name": "LLaVA 1.6 Vicuna 13B",
+    "paramsB": 13.4,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "llama2",
+    "gguf": true,
+    "hf": "llava-hf/llava-v1.6-vicuna-13b-hf",
+    "arch": {
+      "nLayers": 40,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "llava-1.6-34b",
+    "name": "LLaVA 1.6 34B",
+    "paramsB": 34.1,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "llama2",
+    "gguf": true,
+    "hf": "llava-hf/llava-v1.6-34b-hf",
+    "arch": {
+      "nLayers": 60,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "moondream2",
+    "name": "Moondream2",
+    "paramsB": 1.86,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "vikhyatk/moondream2",
+    "arch": {
+      "nLayers": 24,
+      "nKvHeads": 4,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "smolvlm-2.2b",
+    "name": "SmolVLM 2.2B Instruct",
+    "paramsB": 2.25,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "HuggingFaceTB/SmolVLM-Instruct",
+    "arch": {
+      "nLayers": 24,
+      "nKvHeads": 4,
+      "headDim": 64
+    }
+  },
+  {
+    "id": "internvl2-2b",
+    "name": "InternVL2 2B",
+    "paramsB": 2.21,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "OpenGVLab/InternVL2-2B",
+    "arch": {
+      "nLayers": 24,
+      "nKvHeads": 2,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "internvl2-4b",
+    "name": "InternVL2 4B",
+    "paramsB": 4.15,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "OpenGVLab/InternVL2-4B",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 4,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "internvl2-8b",
+    "name": "InternVL2 8B",
+    "paramsB": 8.08,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "OpenGVLab/InternVL2-8B",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "internvl2-26b",
+    "name": "InternVL2 26B",
+    "paramsB": 25.5,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "OpenGVLab/InternVL2-26B",
+    "arch": {
+      "nLayers": 48,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "internvl2-40b",
+    "name": "InternVL2 40B",
+    "paramsB": 40.1,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "OpenGVLab/InternVL2-40B",
+    "arch": {
+      "nLayers": 60,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "florence-2-base",
+    "name": "Florence-2 Base",
+    "paramsB": 0.23,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "mit",
+    "gguf": false,
+    "hf": "microsoft/Florence-2-base",
+    "weightGb": 0.46
+  },
+  {
+    "id": "florence-2-large",
+    "name": "Florence-2 Large",
+    "paramsB": 0.77,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "mit",
+    "gguf": false,
+    "hf": "microsoft/Florence-2-large",
+    "weightGb": 1.54
+  },
+  {
+    "id": "minicpm-v-2.6",
+    "name": "MiniCPM-V 2.6",
+    "paramsB": 8.1,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "openbmb/MiniCPM-V-2_6",
+    "arch": {
+      "nLayers": 28,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "idefics2-8b",
+    "name": "Idefics2 8B",
+    "paramsB": 8.4,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "HuggingFaceM4/idefics2-8b",
+    "arch": {
+      "nLayers": 32,
+      "nKvHeads": 8,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "paligemma-3b",
+    "name": "PaliGemma 3B mix 448",
+    "paramsB": 2.92,
+    "kind": "vlm",
+    "jobs": [
+      "vision"
+    ],
+    "license": "gemma",
+    "gguf": true,
+    "hf": "google/paligemma-3b-mix-448",
+    "arch": {
+      "nLayers": 18,
+      "nKvHeads": 1,
+      "headDim": 256
+    }
+  },
+  {
+    "id": "nomic-embed-text",
+    "name": "Nomic Embed Text v1.5",
+    "paramsB": 0.14,
+    "kind": "embed",
+    "jobs": [
+      "embeddings"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "nomic-ai/nomic-embed-text-v1.5",
+    "weightGb": 0.55
+  },
+  {
+    "id": "bge-small-en",
+    "name": "BGE Small EN v1.5",
+    "paramsB": 0.033,
+    "kind": "embed",
+    "jobs": [
+      "embeddings"
+    ],
+    "license": "mit",
+    "gguf": false,
+    "hf": "BAAI/bge-small-en-v1.5",
+    "weightGb": 0.13
+  },
+  {
+    "id": "bge-base-en",
+    "name": "BGE Base EN v1.5",
+    "paramsB": 0.11,
+    "kind": "embed",
+    "jobs": [
+      "embeddings"
+    ],
+    "license": "mit",
+    "gguf": false,
+    "hf": "BAAI/bge-base-en-v1.5",
+    "weightGb": 0.44
+  },
+  {
+    "id": "bge-large-en",
+    "name": "BGE Large EN v1.5",
+    "paramsB": 0.34,
+    "kind": "embed",
+    "jobs": [
+      "embeddings"
+    ],
+    "license": "mit",
+    "gguf": false,
+    "hf": "BAAI/bge-large-en-v1.5",
+    "weightGb": 1.34
+  },
+  {
+    "id": "bge-m3",
+    "name": "BGE M3",
+    "paramsB": 0.57,
+    "kind": "embed",
+    "jobs": [
+      "embeddings"
+    ],
+    "license": "mit",
+    "gguf": false,
+    "hf": "BAAI/bge-m3",
+    "weightGb": 2.27
+  },
+  {
+    "id": "e5-small-v2",
+    "name": "E5 Small v2",
+    "paramsB": 0.033,
+    "kind": "embed",
+    "jobs": [
+      "embeddings"
+    ],
+    "license": "mit",
+    "gguf": false,
+    "hf": "intfloat/e5-small-v2",
+    "weightGb": 0.13
+  },
+  {
+    "id": "e5-base-v2",
+    "name": "E5 Base v2",
+    "paramsB": 0.11,
+    "kind": "embed",
+    "jobs": [
+      "embeddings"
+    ],
+    "license": "mit",
+    "gguf": false,
+    "hf": "intfloat/e5-base-v2",
+    "weightGb": 0.44
+  },
+  {
+    "id": "e5-large-v2",
+    "name": "E5 Large v2",
+    "paramsB": 0.34,
+    "kind": "embed",
+    "jobs": [
+      "embeddings"
+    ],
+    "license": "mit",
+    "gguf": false,
+    "hf": "intfloat/e5-large-v2",
+    "weightGb": 1.34
+  },
+  {
+    "id": "gte-large",
+    "name": "GTE Large",
+    "paramsB": 0.34,
+    "kind": "embed",
+    "jobs": [
+      "embeddings"
+    ],
+    "license": "mit",
+    "gguf": false,
+    "hf": "thenlper/gte-large",
+    "weightGb": 0.67
+  },
+  {
+    "id": "gte-qwen2-7b",
+    "name": "GTE Qwen2 7B Instruct",
+    "paramsB": 7.61,
+    "kind": "embed",
+    "jobs": [
+      "embeddings"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "Alibaba-NLP/gte-Qwen2-7B-instruct",
+    "arch": {
+      "nLayers": 28,
+      "nKvHeads": 4,
+      "headDim": 128
+    }
+  },
+  {
+    "id": "mxbai-embed-large",
+    "name": "mxbai embed large v1",
+    "paramsB": 0.34,
+    "kind": "embed",
+    "jobs": [
+      "embeddings"
+    ],
+    "license": "apache-2.0",
+    "gguf": false,
+    "hf": "mixedbread-ai/mxbai-embed-large-v1",
+    "weightGb": 0.67
+  },
+  {
+    "id": "snowflake-arctic-embed-m",
+    "name": "Snowflake Arctic Embed M",
+    "paramsB": 0.11,
+    "kind": "embed",
+    "jobs": [
+      "embeddings"
+    ],
+    "license": "apache-2.0",
+    "gguf": false,
+    "hf": "Snowflake/snowflake-arctic-embed-m",
+    "weightGb": 0.44
+  },
+  {
+    "id": "whisper-tiny",
+    "name": "Whisper Tiny",
+    "paramsB": 0.039,
+    "kind": "asr",
+    "jobs": [
+      "speech"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "openai/whisper-tiny",
+    "weightGb": 0.08
+  },
+  {
+    "id": "whisper-base",
+    "name": "Whisper Base",
+    "paramsB": 0.074,
+    "kind": "asr",
+    "jobs": [
+      "speech"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "openai/whisper-base",
+    "weightGb": 0.15
+  },
+  {
+    "id": "whisper-small",
+    "name": "Whisper Small",
+    "paramsB": 0.244,
+    "kind": "asr",
+    "jobs": [
+      "speech"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "openai/whisper-small",
+    "weightGb": 0.48
+  },
+  {
+    "id": "whisper-medium",
+    "name": "Whisper Medium",
+    "paramsB": 0.769,
+    "kind": "asr",
+    "jobs": [
+      "speech"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "openai/whisper-medium",
+    "weightGb": 1.5
+  },
+  {
+    "id": "whisper-large-v3",
+    "name": "Whisper Large v3",
+    "paramsB": 1.55,
+    "kind": "asr",
+    "jobs": [
+      "speech"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "openai/whisper-large-v3",
+    "weightGb": 3.1
+  },
+  {
+    "id": "whisper-large-v3-turbo",
+    "name": "Whisper Large v3 Turbo",
+    "paramsB": 0.81,
+    "kind": "asr",
+    "jobs": [
+      "speech"
+    ],
+    "license": "apache-2.0",
+    "gguf": true,
+    "hf": "openai/whisper-large-v3-turbo",
+    "weightGb": 1.6
+  },
+  {
+    "id": "distil-whisper-large-v3",
+    "name": "Distil-Whisper Large v3",
+    "paramsB": 0.76,
+    "kind": "asr",
+    "jobs": [
+      "speech"
+    ],
+    "license": "mit",
+    "gguf": true,
+    "hf": "distil-whisper/distil-large-v3",
+    "weightGb": 1.5
+  },
+  {
+    "id": "canary-1b",
+    "name": "Canary 1B",
+    "paramsB": 1.0,
+    "kind": "asr",
+    "jobs": [
+      "speech"
+    ],
+    "license": "cc-by-4.0",
+    "gguf": false,
+    "hf": "nvidia/canary-1b",
+    "weightGb": 2.0
+  },
+  {
+    "id": "yolov8n",
+    "name": "YOLOv8n",
+    "paramsB": 0.003,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "agpl-3.0",
+    "gguf": false,
+    "hf": "Ultralytics/YOLOv8",
+    "weightGb": 0.006
+  },
+  {
+    "id": "yolov8s",
+    "name": "YOLOv8s",
+    "paramsB": 0.011,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "agpl-3.0",
+    "gguf": false,
+    "hf": "Ultralytics/YOLOv8",
+    "weightGb": 0.022
+  },
+  {
+    "id": "yolov8m",
+    "name": "YOLOv8m",
+    "paramsB": 0.026,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "agpl-3.0",
+    "gguf": false,
+    "hf": "Ultralytics/YOLOv8",
+    "weightGb": 0.052
+  },
+  {
+    "id": "yolov8l",
+    "name": "YOLOv8l",
+    "paramsB": 0.044,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "agpl-3.0",
+    "gguf": false,
+    "hf": "Ultralytics/YOLOv8",
+    "weightGb": 0.088
+  },
+  {
+    "id": "yolov8x",
+    "name": "YOLOv8x",
+    "paramsB": 0.068,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "agpl-3.0",
+    "gguf": false,
+    "hf": "Ultralytics/YOLOv8",
+    "weightGb": 0.136
+  },
+  {
+    "id": "yolov11n",
+    "name": "YOLO11n",
+    "paramsB": 0.003,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "agpl-3.0",
+    "gguf": false,
+    "hf": "Ultralytics/YOLO11",
+    "weightGb": 0.005
+  },
+  {
+    "id": "yolov11s",
+    "name": "YOLO11s",
+    "paramsB": 0.009,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "agpl-3.0",
+    "gguf": false,
+    "hf": "Ultralytics/YOLO11",
+    "weightGb": 0.019
+  },
+  {
+    "id": "yolov11m",
+    "name": "YOLO11m",
+    "paramsB": 0.02,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "agpl-3.0",
+    "gguf": false,
+    "hf": "Ultralytics/YOLO11",
+    "weightGb": 0.04
+  },
+  {
+    "id": "yolov11l",
+    "name": "YOLO11l",
+    "paramsB": 0.025,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "agpl-3.0",
+    "gguf": false,
+    "hf": "Ultralytics/YOLO11",
+    "weightGb": 0.051
+  },
+  {
+    "id": "yolov11x",
+    "name": "YOLO11x",
+    "paramsB": 0.057,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "agpl-3.0",
+    "gguf": false,
+    "hf": "Ultralytics/YOLO11",
+    "weightGb": 0.115
+  },
+  {
+    "id": "rf-detr-nano",
+    "name": "RF-DETR Nano",
+    "paramsB": 0.03,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "apache-2.0",
+    "gguf": false,
+    "hf": "roboflow/rf-detr",
+    "weightGb": 0.12
+  },
+  {
+    "id": "rf-detr-small",
+    "name": "RF-DETR Small",
+    "paramsB": 0.08,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "apache-2.0",
+    "gguf": false,
+    "hf": "roboflow/rf-detr",
+    "weightGb": 0.32
+  },
+  {
+    "id": "rf-detr-medium",
+    "name": "RF-DETR Medium",
+    "paramsB": 0.15,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "apache-2.0",
+    "gguf": false,
+    "hf": "roboflow/rf-detr",
+    "weightGb": 0.6
+  },
+  {
+    "id": "rf-detr-large",
+    "name": "RF-DETR Large",
+    "paramsB": 0.32,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "apache-2.0",
+    "gguf": false,
+    "hf": "roboflow/rf-detr",
+    "weightGb": 1.28
+  },
+  {
+    "id": "detr-resnet-50",
+    "name": "DETR ResNet-50",
+    "paramsB": 0.041,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "apache-2.0",
+    "gguf": false,
+    "hf": "facebook/detr-resnet-50",
+    "weightGb": 0.16
+  },
+  {
+    "id": "rt-detr-l",
+    "name": "RT-DETR-L",
+    "paramsB": 0.032,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "apache-2.0",
+    "gguf": false,
+    "hf": "PekingU/rtdetr_r50vd",
+    "weightGb": 0.13
+  },
+  {
+    "id": "grounding-dino-tiny",
+    "name": "Grounding DINO Tiny",
+    "paramsB": 0.172,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "apache-2.0",
+    "gguf": false,
+    "hf": "IDEA-Research/grounding-dino-tiny",
+    "weightGb": 0.69
+  },
+  {
+    "id": "sam-vit-base",
+    "name": "SAM ViT-Base",
+    "paramsB": 0.091,
+    "kind": "segment",
+    "jobs": [
+      "segment"
+    ],
+    "license": "apache-2.0",
+    "gguf": false,
+    "hf": "facebook/sam-vit-base",
+    "weightGb": 0.38
+  },
+  {
+    "id": "sam-vit-large",
+    "name": "SAM ViT-Large",
+    "paramsB": 0.308,
+    "kind": "segment",
+    "jobs": [
+      "segment"
+    ],
+    "license": "apache-2.0",
+    "gguf": false,
+    "hf": "facebook/sam-vit-large",
+    "weightGb": 1.25
+  },
+  {
+    "id": "sam-vit-huge",
+    "name": "SAM ViT-Huge",
+    "paramsB": 0.636,
+    "kind": "segment",
+    "jobs": [
+      "segment"
+    ],
+    "license": "apache-2.0",
+    "gguf": false,
+    "hf": "facebook/sam-vit-huge",
+    "weightGb": 2.56
+  },
+  {
+    "id": "sam2-hiera-tiny",
+    "name": "SAM 2 Hiera Tiny",
+    "paramsB": 0.039,
+    "kind": "segment",
+    "jobs": [
+      "segment"
+    ],
+    "license": "apache-2.0",
+    "gguf": false,
+    "hf": "facebook/sam2-hiera-tiny",
+    "weightGb": 0.16
+  },
+  {
+    "id": "sam2-hiera-small",
+    "name": "SAM 2 Hiera Small",
+    "paramsB": 0.046,
+    "kind": "segment",
+    "jobs": [
+      "segment"
+    ],
+    "license": "apache-2.0",
+    "gguf": false,
+    "hf": "facebook/sam2-hiera-small",
+    "weightGb": 0.18
+  },
+  {
+    "id": "sam2-hiera-base-plus",
+    "name": "SAM 2 Hiera Base+",
+    "paramsB": 0.081,
+    "kind": "segment",
+    "jobs": [
+      "segment"
+    ],
+    "license": "apache-2.0",
+    "gguf": false,
+    "hf": "facebook/sam2-hiera-base-plus",
+    "weightGb": 0.32
+  },
+  {
+    "id": "sam2-hiera-large",
+    "name": "SAM 2 Hiera Large",
+    "paramsB": 0.224,
+    "kind": "segment",
+    "jobs": [
+      "segment"
+    ],
+    "license": "apache-2.0",
+    "gguf": false,
+    "hf": "facebook/sam2-hiera-large",
+    "weightGb": 0.9
+  }
+]

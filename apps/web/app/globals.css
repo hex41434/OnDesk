@@ -1,0 +1,191 @@
+:root {
+  --bg: #12110e;
+  --bg-2: #1b1914;
+  --ink: #f3efe6;
+  --muted: #9a9284;
+  --line: #2e2b24;
+  --accent: #e8a317;
+  --perfect: #7dce7a;
+  --good: #e8a317;
+  --tight: #e07a3d;
+  --no: #c45c5c;
+  --font: "IBM Plex Sans", "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 4rem;
+}
+
+header.top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.brand {
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nav { display: flex; gap: 1.1rem; color: var(--muted); font-size: 0.95rem; }
+.nav a { color: var(--muted); }
+.nav a:hover { color: var(--ink); }
+
+.lede {
+  font-size: 1.65rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  max-width: 28rem;
+  margin: 0 0 0.4rem;
+}
+
+.sub { color: var(--muted); margin: 0 0 1.75rem; max-width: 36rem; }
+
+.panel {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+label.field {
+  display: block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 0.45rem;
+}
+
+input[type="text"], input[type="search"] {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font: inherit;
+  padding: 0.55rem 0.7rem;
+}
+
+input:focus {
+  outline: 1px solid var(--accent);
+  border-color: var(--accent);
+}
+
+.row { display: grid; gap: 0.85rem; }
+@media (min-width: 720px) {
+  .row.two { grid-template-columns: 1fr 1fr; }
+}
+
+.chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.chip {
+  font: inherit;
+  font-size: 0.85rem;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 0.28rem 0.6rem;
+  cursor: pointer;
+}
+.chip.on {
+  border-color: var(--accent);
+  color: var(--bg);
+  background: var(--accent);
+}
+
+.suggest {
+  list-style: none;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+.suggest li button {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  color: var(--ink);
+  font: inherit;
+  padding: 0.4rem 0.65rem;
+  cursor: pointer;
+}
+.suggest li button:hover { background: var(--bg-2); }
+
+table.results {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+table.results th {
+  text-align: left;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  font-weight: 500;
+  padding: 0.45rem 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+table.results td {
+  padding: 0.55rem 0.5rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+table.results tr:hover td { background: #201d17; }
+
+.band {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.band.perfect { color: var(--perfect); }
+.band.good { color: var(--good); }
+.band.tight { color: var(--tight); }
+.band.no { color: var(--no); }
+
+.est { color: var(--muted); font-size: 0.85rem; }
+.hint { color: var(--muted); font-size: 0.88rem; margin: 0.6rem 0 0; }
+
+.card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  padding: 1.1rem 1.15rem;
+}
+.card h2 { margin: 0 0 0.35rem; font-size: 1.25rem; }
+.math { font-variant-numeric: tabular-nums; color: var(--muted); }
+.math dt { display: inline; }
+.math dd { display: inline; margin: 0 0.8rem 0 0.25rem; color: var(--ink); }
+
+.prose { max-width: 40rem; }
+.prose h1 { font-size: 1.7rem; letter-spacing: -0.03em; }
+.prose h2 { font-size: 1.15rem; margin-top: 1.8rem; }
+.prose p, .prose li { color: #d6d0c4; }
+.prose code {
+  font-size: 0.9em;
+  background: var(--bg-2);
+  padding: 0.05em 0.3em;
+}
+
+.error { color: var(--no); font-size: 0.9rem; }
+.meta { color: var(--muted); font-size: 0.85rem; }

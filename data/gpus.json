@@ -1,0 +1,458 @@
+[
+  {
+    "id": "rtx-5090",
+    "name": "RTX 5090 32GB",
+    "maker": "nvidia",
+    "memoryGb": 32,
+    "memoryKind": "vram",
+    "bandwidthGBs": 1792
+  },
+  {
+    "id": "rtx-5080",
+    "name": "RTX 5080 16GB",
+    "maker": "nvidia",
+    "memoryGb": 16,
+    "memoryKind": "vram",
+    "bandwidthGBs": 960
+  },
+  {
+    "id": "rtx-5070-ti",
+    "name": "RTX 5070 Ti 16GB",
+    "maker": "nvidia",
+    "memoryGb": 16,
+    "memoryKind": "vram",
+    "bandwidthGBs": 896
+  },
+  {
+    "id": "rtx-5070",
+    "name": "RTX 5070 12GB",
+    "maker": "nvidia",
+    "memoryGb": 12,
+    "memoryKind": "vram",
+    "bandwidthGBs": 672
+  },
+  {
+    "id": "rtx-5060-ti-16",
+    "name": "RTX 5060 Ti 16GB",
+    "maker": "nvidia",
+    "memoryGb": 16,
+    "memoryKind": "vram",
+    "bandwidthGBs": 448
+  },
+  {
+    "id": "rtx-5060-ti-8",
+    "name": "RTX 5060 Ti 8GB",
+    "maker": "nvidia",
+    "memoryGb": 8,
+    "memoryKind": "vram",
+    "bandwidthGBs": 448
+  },
+  {
+    "id": "rtx-5060",
+    "name": "RTX 5060 8GB",
+    "maker": "nvidia",
+    "memoryGb": 8,
+    "memoryKind": "vram",
+    "bandwidthGBs": 384
+  },
+  {
+    "id": "rtx-4090",
+    "name": "RTX 4090 24GB",
+    "maker": "nvidia",
+    "memoryGb": 24,
+    "memoryKind": "vram",
+    "bandwidthGBs": 1008
+  },
+  {
+    "id": "rtx-4080-super",
+    "name": "RTX 4080 Super 16GB",
+    "maker": "nvidia",
+    "memoryGb": 16,
+    "memoryKind": "vram",
+    "bandwidthGBs": 736
+  },
+  {
+    "id": "rtx-4080",
+    "name": "RTX 4080 16GB",
+    "maker": "nvidia",
+    "memoryGb": 16,
+    "memoryKind": "vram",
+    "bandwidthGBs": 717
+  },
+  {
+    "id": "rtx-4070-ti-super",
+    "name": "RTX 4070 Ti Super 16GB",
+    "maker": "nvidia",
+    "memoryGb": 16,
+    "memoryKind": "vram",
+    "bandwidthGBs": 672
+  },
+  {
+    "id": "rtx-4070-ti",
+    "name": "RTX 4070 Ti 12GB",
+    "maker": "nvidia",
+    "memoryGb": 12,
+    "memoryKind": "vram",
+    "bandwidthGBs": 672
+  },
+  {
+    "id": "rtx-4070-super",
+    "name": "RTX 4070 Super 12GB",
+    "maker": "nvidia",
+    "memoryGb": 12,
+    "memoryKind": "vram",
+    "bandwidthGBs": 504
+  },
+  {
+    "id": "rtx-4070",
+    "name": "RTX 4070 12GB",
+    "maker": "nvidia",
+    "memoryGb": 12,
+    "memoryKind": "vram",
+    "bandwidthGBs": 504
+  },
+  {
+    "id": "rtx-4060-ti-16",
+    "name": "RTX 4060 Ti 16GB",
+    "maker": "nvidia",
+    "memoryGb": 16,
+    "memoryKind": "vram",
+    "bandwidthGBs": 288
+  },
+  {
+    "id": "rtx-4060-ti-8",
+    "name": "RTX 4060 Ti 8GB",
+    "maker": "nvidia",
+    "memoryGb": 8,
+    "memoryKind": "vram",
+    "bandwidthGBs": 288
+  },
+  {
+    "id": "rtx-4060",
+    "name": "RTX 4060 8GB",
+    "maker": "nvidia",
+    "memoryGb": 8,
+    "memoryKind": "vram",
+    "bandwidthGBs": 272
+  },
+  {
+    "id": "rtx-4070-laptop",
+    "name": "RTX 4070 laptop 8GB",
+    "maker": "nvidia",
+    "memoryGb": 8,
+    "memoryKind": "vram",
+    "bandwidthGBs": 256
+  },
+  {
+    "id": "rtx-4060-laptop",
+    "name": "RTX 4060 laptop 8GB",
+    "maker": "nvidia",
+    "memoryGb": 8,
+    "memoryKind": "vram",
+    "bandwidthGBs": 256
+  },
+  {
+    "id": "rtx-4050-laptop",
+    "name": "RTX 4050 laptop 6GB",
+    "maker": "nvidia",
+    "memoryGb": 6,
+    "memoryKind": "vram",
+    "bandwidthGBs": 192
+  },
+  {
+    "id": "rtx-3090",
+    "name": "RTX 3090 24GB",
+    "maker": "nvidia",
+    "memoryGb": 24,
+    "memoryKind": "vram",
+    "bandwidthGBs": 936
+  },
+  {
+    "id": "rtx-3080-12",
+    "name": "RTX 3080 12GB",
+    "maker": "nvidia",
+    "memoryGb": 12,
+    "memoryKind": "vram",
+    "bandwidthGBs": 912
+  },
+  {
+    "id": "rtx-3080",
+    "name": "RTX 3080 10GB",
+    "maker": "nvidia",
+    "memoryGb": 10,
+    "memoryKind": "vram",
+    "bandwidthGBs": 760
+  },
+  {
+    "id": "rtx-3070",
+    "name": "RTX 3070 8GB",
+    "maker": "nvidia",
+    "memoryGb": 8,
+    "memoryKind": "vram",
+    "bandwidthGBs": 448
+  },
+  {
+    "id": "rtx-3060-12",
+    "name": "RTX 3060 12GB",
+    "maker": "nvidia",
+    "memoryGb": 12,
+    "memoryKind": "vram",
+    "bandwidthGBs": 360
+  },
+  {
+    "id": "rtx-3060-8",
+    "name": "RTX 3060 8GB",
+    "maker": "nvidia",
+    "memoryGb": 8,
+    "memoryKind": "vram",
+    "bandwidthGBs": 240
+  },
+  {
+    "id": "h100-80",
+    "name": "H100 80GB",
+    "maker": "nvidia",
+    "memoryGb": 80,
+    "memoryKind": "vram",
+    "bandwidthGBs": 3350
+  },
+  {
+    "id": "a100-80",
+    "name": "A100 80GB",
+    "maker": "nvidia",
+    "memoryGb": 80,
+    "memoryKind": "vram",
+    "bandwidthGBs": 2039
+  },
+  {
+    "id": "a100-40",
+    "name": "A100 40GB",
+    "maker": "nvidia",
+    "memoryGb": 40,
+    "memoryKind": "vram",
+    "bandwidthGBs": 1555
+  },
+  {
+    "id": "l40s",
+    "name": "L40S 48GB",
+    "maker": "nvidia",
+    "memoryGb": 48,
+    "memoryKind": "vram",
+    "bandwidthGBs": 864
+  },
+  {
+    "id": "rtx-6000-ada",
+    "name": "RTX 6000 Ada 48GB",
+    "maker": "nvidia",
+    "memoryGb": 48,
+    "memoryKind": "vram",
+    "bandwidthGBs": 960
+  },
+  {
+    "id": "a6000",
+    "name": "RTX A6000 48GB",
+    "maker": "nvidia",
+    "memoryGb": 48,
+    "memoryKind": "vram",
+    "bandwidthGBs": 768
+  },
+  {
+    "id": "t4",
+    "name": "Tesla T4 16GB",
+    "maker": "nvidia",
+    "memoryGb": 16,
+    "memoryKind": "vram",
+    "bandwidthGBs": 320
+  },
+  {
+    "id": "rx-7900-xtx",
+    "name": "RX 7900 XTX 24GB",
+    "maker": "amd",
+    "memoryGb": 24,
+    "memoryKind": "vram",
+    "bandwidthGBs": 960
+  },
+  {
+    "id": "rx-7900-xt",
+    "name": "RX 7900 XT 20GB",
+    "maker": "amd",
+    "memoryGb": 20,
+    "memoryKind": "vram",
+    "bandwidthGBs": 800
+  },
+  {
+    "id": "rx-7800-xt",
+    "name": "RX 7800 XT 16GB",
+    "maker": "amd",
+    "memoryGb": 16,
+    "memoryKind": "vram",
+    "bandwidthGBs": 624
+  },
+  {
+    "id": "m4-16",
+    "name": "M4 16GB",
+    "maker": "apple",
+    "memoryGb": 16,
+    "memoryKind": "unified",
+    "bandwidthGBs": 120
+  },
+  {
+    "id": "m4-24",
+    "name": "M4 24GB",
+    "maker": "apple",
+    "memoryGb": 24,
+    "memoryKind": "unified",
+    "bandwidthGBs": 120
+  },
+  {
+    "id": "m4-pro-24",
+    "name": "M4 Pro 24GB",
+    "maker": "apple",
+    "memoryGb": 24,
+    "memoryKind": "unified",
+    "bandwidthGBs": 273
+  },
+  {
+    "id": "m4-pro-48",
+    "name": "M4 Pro 48GB",
+    "maker": "apple",
+    "memoryGb": 48,
+    "memoryKind": "unified",
+    "bandwidthGBs": 273
+  },
+  {
+    "id": "m4-max-36",
+    "name": "M4 Max 36GB",
+    "maker": "apple",
+    "memoryGb": 36,
+    "memoryKind": "unified",
+    "bandwidthGBs": 546
+  },
+  {
+    "id": "m4-max-64",
+    "name": "M4 Max 64GB",
+    "maker": "apple",
+    "memoryGb": 64,
+    "memoryKind": "unified",
+    "bandwidthGBs": 546
+  },
+  {
+    "id": "m4-max-128",
+    "name": "M4 Max 128GB",
+    "maker": "apple",
+    "memoryGb": 128,
+    "memoryKind": "unified",
+    "bandwidthGBs": 546
+  },
+  {
+    "id": "m3-ultra-96",
+    "name": "M3 Ultra 96GB (Mac Studio)",
+    "maker": "apple",
+    "memoryGb": 96,
+    "memoryKind": "unified",
+    "bandwidthGBs": 819
+  },
+  {
+    "id": "m3-ultra-256",
+    "name": "M3 Ultra 256GB (Mac Studio)",
+    "maker": "apple",
+    "memoryGb": 256,
+    "memoryKind": "unified",
+    "bandwidthGBs": 819
+  },
+  {
+    "id": "m3-16",
+    "name": "M3 16GB",
+    "maker": "apple",
+    "memoryGb": 16,
+    "memoryKind": "unified",
+    "bandwidthGBs": 100
+  },
+  {
+    "id": "m3-pro-18",
+    "name": "M3 Pro 18GB",
+    "maker": "apple",
+    "memoryGb": 18,
+    "memoryKind": "unified",
+    "bandwidthGBs": 150
+  },
+  {
+    "id": "m3-max-36",
+    "name": "M3 Max 36GB",
+    "maker": "apple",
+    "memoryGb": 36,
+    "memoryKind": "unified",
+    "bandwidthGBs": 400
+  },
+  {
+    "id": "m2-16",
+    "name": "M2 16GB",
+    "maker": "apple",
+    "memoryGb": 16,
+    "memoryKind": "unified",
+    "bandwidthGBs": 100
+  },
+  {
+    "id": "m2-max-32",
+    "name": "M2 Max 32GB",
+    "maker": "apple",
+    "memoryGb": 32,
+    "memoryKind": "unified",
+    "bandwidthGBs": 400
+  },
+  {
+    "id": "m2-ultra-64",
+    "name": "M2 Ultra 64GB",
+    "maker": "apple",
+    "memoryGb": 64,
+    "memoryKind": "unified",
+    "bandwidthGBs": 800
+  },
+  {
+    "id": "m1-16",
+    "name": "M1 16GB",
+    "maker": "apple",
+    "memoryGb": 16,
+    "memoryKind": "unified",
+    "bandwidthGBs": 68
+  },
+  {
+    "id": "m1-max-32",
+    "name": "M1 Max 32GB",
+    "maker": "apple",
+    "memoryGb": 32,
+    "memoryKind": "unified",
+    "bandwidthGBs": 400
+  },
+  {
+    "id": "cpu-16",
+    "name": "CPU only 16GB RAM",
+    "maker": "cpu",
+    "memoryGb": 16,
+    "memoryKind": "system",
+    "bandwidthGBs": 50
+  },
+  {
+    "id": "cpu-32",
+    "name": "CPU only 32GB RAM",
+    "maker": "cpu",
+    "memoryGb": 32,
+    "memoryKind": "system",
+    "bandwidthGBs": 50
+  },
+  {
+    "id": "cpu-64",
+    "name": "CPU only 64GB RAM",
+    "maker": "cpu",
+    "memoryGb": 64,
+    "memoryKind": "system",
+    "bandwidthGBs": 70
+  },
+  {
+    "id": "cpu-128",
+    "name": "CPU only 128GB RAM",
+    "maker": "cpu",
+    "memoryGb": 128,
+    "memoryKind": "system",
+    "bandwidthGBs": 90
+  }
+]
