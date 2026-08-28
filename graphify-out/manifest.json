@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   "apps/web/app/desk.tsx": {
-    "mtime": 1787781781.0624173,
-    "ast_hash": "9def16c6634a8d914a5aefc64669f214",
+    "mtime": 1787957662.818703,
+    "ast_hash": "dced535b9d2766b7f0feb6edbc913af1",
     "semantic_hash": ""
   },
   "apps/web/app/digest/entries.json": {
@@ -30,7 +30,7 @@
     "semantic_hash": ""
   },
   "apps/web/app/page.tsx": {
-    "mtime": 1787680923.359122,
+    "mtime": 1787783524.9950979,
     "ast_hash": "5554123b22ef769ca9ef5d0ef45b6d70",
     "semantic_hash": ""
   },
@@ -65,8 +65,8 @@
     "semantic_hash": ""
   },
   "data/models.json": {
-    "mtime": 1787680860.7511039,
-    "ast_hash": "a468b0e0c8b86931e323844a57bb3f05",
+    "mtime": 1787955696.9871686,
+    "ast_hash": "fde3f90201a41439b1081d0cc03d24c0",
     "semantic_hash": ""
   },
   "package.json": {
@@ -90,23 +90,23 @@
     "semantic_hash": ""
   },
   "packages/core/src/hardware.ts": {
-    "mtime": 1787681013.6805637,
-    "ast_hash": "28352b8872b38b2c225601bf9546737e",
+    "mtime": 1787847203.8232102,
+    "ast_hash": "f7f3997e7a3e33202da2ded7d3361c53",
     "semantic_hash": ""
   },
   "packages/core/src/hub.ts": {
-    "mtime": 1787681016.104524,
-    "ast_hash": "2f7c2a44540c0ec7a6543fd1d1166011",
+    "mtime": 1787955676.8299103,
+    "ast_hash": "6766e370637a9d3410125b1e6ff442e0",
     "semantic_hash": ""
   },
   "packages/core/src/index.ts": {
-    "mtime": 1787681009.0451849,
-    "ast_hash": "195fff6e0e4536e5cb22e764194210e0",
+    "mtime": 1787957578.3678641,
+    "ast_hash": "9d6ddd5ff2bbf494fe218ab71131c087",
     "semantic_hash": ""
   },
   "packages/core/src/intent.ts": {
-    "mtime": 1787681012.860553,
-    "ast_hash": "ca9977b49e3aa6fa5494349bba7ecd9d",
+    "mtime": 1787955674.9376657,
+    "ast_hash": "4790e34a34cc74daf700d3ca0449a06b",
     "semantic_hash": ""
   },
   "packages/core/src/memory.ts": {
@@ -115,23 +115,23 @@
     "semantic_hash": ""
   },
   "packages/core/src/rank.ts": {
-    "mtime": 1787681011.5276172,
-    "ast_hash": "bfc73a7dfcf7d3bc3b36059872b7319a",
+    "mtime": 1787957577.4291463,
+    "ast_hash": "81006aa53d5437ce201e5f97ee6ad8ec",
     "semantic_hash": ""
   },
   "packages/core/src/types.ts": {
-    "mtime": 1787674423.8684607,
-    "ast_hash": "244a6d2f3cba38562d93562ea54c248d",
+    "mtime": 1787957575.6480618,
+    "ast_hash": "fb8eb08b756a037d5fee3ffff0a6b424",
     "semantic_hash": ""
   },
   "packages/core/test/catalog.test.ts": {
-    "mtime": 1787681018.779712,
-    "ast_hash": "9563987730c61287981fe8e3f90d7e10",
+    "mtime": 1787957580.086425,
+    "ast_hash": "1089850c970e37ff8ff93174efdaf185",
     "semantic_hash": ""
   },
   "packages/core/test/fit.test.ts": {
-    "mtime": 1787681017.7461574,
-    "ast_hash": "fed7639bf9ef3e83fabdede1d54b5d14",
+    "mtime": 1787957586.3951297,
+    "ast_hash": "9163095edc0bab8ea3b0b184e887e90f",
     "semantic_hash": ""
   },
   "packages/core/tsconfig.json": {
@@ -190,8 +190,38 @@
     "semantic_hash": ""
   },
   "apps/web/lib/gemini.ts": {
-    "mtime": 1787781029.1497102,
-    "ast_hash": "8e35fe3954396ba67cfe7fccb5f93bdf",
+    "mtime": 1787955677.8323863,
+    "ast_hash": "d16f455d9e1da6f78bc8f8ce78857891",
+    "semantic_hash": ""
+  },
+  "packages/core/src/companion.ts": {
+    "mtime": 1787847203.8338528,
+    "ast_hash": "b8fee7b8884fdc99d92cef31e50d3c67",
+    "semantic_hash": ""
+  },
+  "packages/core/test/companion.test.ts": {
+    "mtime": 1787847203.806885,
+    "ast_hash": "6e3b6b6c0f1c9c8bdb7441bb2b129a67",
+    "semantic_hash": ""
+  },
+  "apps/web/components/hf-logo.tsx": {
+    "mtime": 1787847203.8066308,
+    "ast_hash": "54cd2f1751efbcc5fdf35d879bdf5cee",
+    "semantic_hash": ""
+  },
+  "apps/web/app/model-tab.tsx": {
+    "mtime": 1787957628.4060097,
+    "ast_hash": "a6e13f78b247940d5a3c912c12be2077",
+    "semantic_hash": ""
+  },
+  "apps/web/components/sort-th.tsx": {
+    "mtime": 1787957589.518684,
+    "ast_hash": "4c37c9c527ba62014ed57709cd1cc157",
+    "semantic_hash": ""
+  },
+  "apps/web/components/speed-bar.tsx": {
+    "mtime": 1787957588.0525653,
+    "ast_hash": "041c3b05643825ea7e1bdeba663da7f0",
     "semantic_hash": ""
   }
 }

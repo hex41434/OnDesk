@@ -57,6 +57,10 @@ function archFromConfig(cfg: HubConfig | undefined): Architecture | undefined {
   return { nLayers, nKvHeads, headDim };
 }
 
+function hasToolCalling(tags: string): boolean {
+  return /function.?call|tool.?use|tool.?call/.test(tags);
+}
+
 function kindAndJobs(card: HubCard): { kind: ModelKind; jobs: Job[] } {
   const tags = [
     ...(card.tags ?? []),
@@ -87,12 +91,14 @@ function kindAndJobs(card: HubCard): { kind: ModelKind; jobs: Job[] } {
   ) {
     const jobs: Job[] = ["vision"];
     if (/code/.test(tags)) jobs.push("coding");
+    if (hasToolCalling(tags)) jobs.push("tools");
     return { kind: "vlm", jobs };
   }
 
   const jobs: Job[] = ["chat"];
   if (/code|coder|starcoder|codestral/.test(tags)) jobs.push("coding");
   if (/reason|r1|thinking/.test(tags)) jobs.push("reasoning");
+  if (hasToolCalling(tags)) jobs.push("tools");
   return { kind: "llm", jobs };
 }
 

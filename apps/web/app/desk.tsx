@@ -2,31 +2,84 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
+  companionFor,
+  companionLine,
   findHardware,
-  fit,
   gpus,
   models,
-  parseHfRepo,
   rank,
   type Hardware,
   type Job,
   type Model,
+  type Quant,
   type RankedFit,
   type RunMode,
 } from "@ondesk/core";
 import { jsonAuthHeaders } from "../lib/browser-key";
+import { HfLogo } from "../components/hf-logo";
+import { SortTh, type SortDir } from "../components/sort-th";
+import { SpeedBar } from "../components/speed-bar";
+import { ModelTab } from "./model-tab";
 
-const JOBS: { id: Job | null; label: string }[] = [
-  { id: null, label: "any" },
-  { id: "vision", label: "vision" },
+const JOB_MULTIMODAL: { id: Job; label: string }[] = [
+  { id: "vision", label: "multimodal" },
+];
+
+const JOB_CV: { id: Job; label: string }[] = [
   { id: "detect", label: "detect" },
   { id: "segment", label: "segment" },
+];
+
+const JOB_LANG: { id: Job; label: string }[] = [
   { id: "coding", label: "coding" },
   { id: "chat", label: "chat" },
   { id: "reasoning", label: "reasoning" },
+  { id: "tools", label: "tool calling" },
   { id: "embeddings", label: "embeddings" },
   { id: "speech", label: "speech" },
 ];
+
+type SortKey = "name" | "params" | "gb" | "quant" | "fit" | "toks";
+type DeskTab = "hw" | "model";
+
+const BAND_SORT = { perfect: 0, good: 1, tight: 2, no: 3 } as const;
+const QUANT_SORT: Record<Quant, number> = {
+  fp16: 0,
+  q8: 1,
+  q6: 2,
+  q5: 3,
+  q4: 4,
+  q3: 5,
+  q2: 6,
+};
+
+function cmpText(a: string, b: string): number {
+  if (a < b) return -1;
+  if (a > b) return 1;
+  return 0;
+}
+
+function sortRows(rows: RankedFit[], key: SortKey, dir: SortDir): RankedFit[] {
+  const mul = dir === "asc" ? 1 : -1;
+  return [...rows].sort((a, b) => {
+    if (key === "fit") {
+      const band = (BAND_SORT[a.band] - BAND_SORT[b.band]) * mul;
+      if (band !== 0) return band;
+      const size = b.model.paramsB - a.model.paramsB;
+      if (size !== 0) return size;
+      return cmpText(a.model.id, b.model.id);
+    }
+    let cmp = 0;
+    if (key === "name") cmp = cmpText(a.model.name, b.model.name);
+    else if (key === "params") cmp = a.model.paramsB - b.model.paramsB;
+    else if (key === "gb") cmp = a.gb - b.gb;
+    else if (key === "quant") {
+      cmp = (a.quant ? QUANT_SORT[a.quant] : 99) - (b.quant ? QUANT_SORT[b.quant] : 99);
+    } else if (key === "toks") cmp = (a.tokensPerSec ?? -1) - (b.tokensPerSec ?? -1);
+    if (cmp === 0) cmp = cmpText(a.model.id, b.model.id);
+    return cmp * mul;
+  });
+}
 
 function hfUrl(id: string): string {
   return `https://huggingface.co/${id}`;
@@ -36,11 +89,16 @@ function sizeLabel(paramsB: number): string {
   if (paramsB >= 100) return `${paramsB.toFixed(0)}B`;
   if (paramsB >= 1) return `${paramsB.toFixed(paramsB >= 10 ? 0 : 1)}B`;
   if (paramsB >= 0.1) return `${Math.round(paramsB * 1000)}M`;
-  return `${Math.round(paramsB * 1e9).toLocaleString()} params`;
+  return `${Math.round(paramsB * 1e9).toLocaleString("en-US")} params`;
 }
 
-function sameModel(a: Model, b: Model): boolean {
-  return a.id === b.id || (!!a.hf && a.hf === b.hf);
+function nameHit(model: Model, query: string): boolean {
+  const q = query.toLowerCase();
+  return (
+    model.name.toLowerCase().includes(q) ||
+    model.id.toLowerCase().includes(q) ||
+    (model.hf?.toLowerCase().includes(q) ?? false)
+  );
 }
 
 export function Desk() {
@@ -50,18 +108,12 @@ export function Desk() {
   );
   const [openSuggest, setOpenSuggest] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [tab, setTab] = useState<DeskTab>("hw");
   const [job, setJob] = useState<Job | null>(null);
   const [mode, setMode] = useState<RunMode>("infer");
-  const [hfInput, setHfInput] = useState("");
-  const [pastedModel, setPastedModel] = useState<Model | null>(null);
-  const [hfError, setHfError] = useState<string | null>(null);
-  const [hfLoading, setHfLoading] = useState(false);
-  const [showNo, setShowNo] = useState(false);
-  const [hits, setHits] = useState<
-    { id: string; pipeline_tag: string | null; downloads: number | null }[]
-  >([]);
-  const [searchVia, setSearchVia] = useState<"gemini" | "hub" | null>(null);
-  const [searchHint, setSearchHint] = useState<string | null>(null);
+  const [sortKey, setSortKey] = useState<SortKey | null>(null);
+  const [sortDir, setSortDir] = useState<SortDir>("desc");
+  const [nameFilter, setNameFilter] = useState("");
   const [smartHw, setSmartHw] = useState<Hardware[] | null>(null);
   const [hwVia, setHwVia] = useState<"gemini" | "local" | null>(null);
   const hwBox = useRef<HTMLDivElement>(null);
@@ -73,21 +125,23 @@ export function Desk() {
   );
   const suggestions = smartHw ?? localHw;
 
-  const pasted = pastedModel
-    ? { model: pastedModel, result: fit(pastedModel, picked, { mode }) }
-    : null;
+  const pair = useMemo(() => companionFor(picked), [picked]);
 
   const rows = useMemo(() => {
-    const catalog = rank(models, picked, {
-      job,
-      mode,
-      hideNo: !showNo,
-    });
-    if (!pasted) return catalog.slice(0, 20);
-    const head: RankedFit = { ...pasted.result, model: pasted.model };
-    const rest = catalog.filter((r) => !sameModel(r.model, pasted.model));
-    return [head, ...rest].slice(0, 20);
-  }, [picked, job, mode, showNo, pasted]);
+    const catalog = rank(models, picked, { job, mode });
+    const ordered = sortKey ? sortRows(catalog, sortKey, sortDir) : catalog;
+    const q = nameFilter.trim();
+    return q ? ordered.filter((r) => nameHit(r.model, q)) : ordered;
+  }, [picked, job, mode, sortKey, sortDir, nameFilter]);
+
+  function onSort(key: SortKey) {
+    if (sortKey === key) {
+      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+      return;
+    }
+    setSortKey(key);
+    setSortDir(key === "name" || key === "fit" ? "asc" : "desc");
+  }
 
   function closeHw() {
     setOpenSuggest(false);
@@ -166,84 +220,57 @@ export function Desk() {
     return () => window.clearTimeout(t);
   }, [hwQuery, openSuggest, picked.name]);
 
-  async function scoreRepo(id: string) {
-    setHfLoading(true);
-    setHfError(null);
-    try {
-      const res = await fetch(`/api/hf?id=${encodeURIComponent(id)}`);
-      const body = (await res.json()) as { model?: Model; error?: string };
-      if (!res.ok || !body.model) {
-        setHfError(body.error ?? "Could not fetch that repo.");
-        setPastedModel(null);
-        return;
-      }
-      setPastedModel(body.model);
-      setHfInput(id);
-      setHits([]);
-      setJob(null);
-    } catch {
-      setHfError("Network error talking to Hugging Face.");
-      setPastedModel(null);
-    } finally {
-      setHfLoading(false);
-    }
-  }
-
-  async function onModelQuery() {
-    const asId = parseHfRepo(hfInput);
-    if (asId) {
-      await scoreRepo(asId);
-      return;
-    }
-    const query = hfInput.trim();
-    if (query.length < 2) {
-      setHfError("Type a name (qwen 2.5 code) or paste org/name.");
-      return;
-    }
-    setHfLoading(true);
-    setHfError(null);
-    setHits([]);
-    try {
-      const res = await fetch("/api/search-models", {
-        method: "POST",
-        headers: jsonAuthHeaders(),
-        body: JSON.stringify({ query }),
-      });
-      const body = (await res.json()) as {
-        hits?: { id: string; pipeline_tag: string | null; downloads: number | null }[];
-        search?: string;
-        via?: "gemini" | "hub";
-        error?: string;
-      };
-      if (!res.ok) {
-        setHfError(body.error ?? "Search failed.");
-        return;
-      }
-      setHits(body.hits ?? []);
-      setSearchVia(body.via ?? "hub");
-      setSearchHint(body.search ?? query);
-      if (!body.hits?.length) {
-        setHfError("No Hub repos for that. Try a more specific name.");
-      }
-    } catch {
-      setHfError("Network error while searching.");
-    } finally {
-      setHfLoading(false);
-    }
-  }
-
   return (
     <>
       <h1 className="lede">What fits on the desk. Not in the cloud.</h1>
       <p className="sub">
-        Pick a GPU, or search a model. Hub links are real. Fit numbers are
-        ours, not Gemini. Cite{" "}
+        Pick a GPU, or open Model and search a repo. Fit numbers are ours, not
+        Gemini. Cite{" "}
         <a href="https://github.com/AlexsJones/llmfit">llmfit</a> as prior art
         for local scoring; this page answers the question before you buy.
       </p>
+      <p className="hf-badge">
+        <HfLogo size={18} />
+        <span>
+          Catalog &amp; repo links via{" "}
+          <a href="https://huggingface.co/models" target="_blank" rel="noreferrer">
+            Hugging Face Hub
+          </a>
+        </span>
+      </p>
 
+      <div className="tabs" role="tablist" aria-label="Fit mode">
+        <button
+          type="button"
+          role="tab"
+          id="tab-hw"
+          aria-selected={tab === "hw"}
+          aria-controls="panel-hw"
+          className={tab === "hw" ? "tab on" : "tab"}
+          onClick={() => setTab("hw")}
+        >
+          Hardware
+        </button>
+        <button
+          type="button"
+          role="tab"
+          id="tab-model"
+          aria-selected={tab === "model"}
+          aria-controls="panel-model"
+          className={tab === "model" ? "tab on" : "tab"}
+          onClick={() => setTab("model")}
+        >
+          Model
+        </button>
+      </div>
+
+      <div
+        id="panel-hw"
+        role="tabpanel"
+        aria-labelledby="tab-hw"
+        hidden={tab !== "hw"}
+      >
       <div className="panel">
-        <div className="row two">
           <div className="hw-picker" ref={hwBox}>
             <label className="field" htmlFor="hw">
               Hardware
@@ -307,10 +334,14 @@ export function Desk() {
               )}
             </div>
             {!openSuggest && (
-              <p className="hw-spec picked">
-                {picked.memoryGb} GB {picked.memoryKind} · {picked.bandwidthGBs}{" "}
-                GB/s
-              </p>
+              <>
+                <p className="hw-spec picked">
+                  {picked.memoryGb} GB {picked.memoryKind} · {picked.bandwidthGBs}{" "}
+                  GB/s
+                </p>
+                <p className="hw-spec companion">{companionLine(pair)}</p>
+                <p className="hint pair-note">{pair.note}</p>
+              </>
             )}
             {openSuggest && hwVia === "gemini" && (
               <p className="hint">smart hardware search</p>
@@ -349,63 +380,21 @@ export function Desk() {
               </ul>
             )}
           </div>
-          <div>
-            <label className="field" htmlFor="hf">
-              Search a model
-            </label>
-            <input
-              id="hf"
-              type="text"
-              placeholder="qwen 2.5 code — or paste org/name"
-              value={hfInput}
-              onChange={(e) => setHfInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") void onModelQuery();
-              }}
-            />
-            <p className="hint">
-              <button
-                type="button"
-                className="chip"
-                onClick={() => void onModelQuery()}
-              >
-                {hfLoading ? "Searching…" : "Search Hub"}
-              </button>
-              {searchVia && (
-                <span className="est">
-                  {" "}
-                  via {searchVia}
-                  {searchHint ? ` · ${searchHint}` : ""}
-                </span>
-              )}
-              {hfError && <span className="error"> {hfError}</span>}
-            </p>
-            {hits.length > 0 && (
-              <ul className="search-hits">
-                {hits.map((hit) => (
-                  <li key={hit.id}>
-                    <button type="button" onClick={() => void scoreRepo(hit.id)}>
-                      <span className="hw-name">{hit.id}</span>
-                      <span className="hw-spec">
-                        {hit.pipeline_tag ?? "model"}
-                        {hit.downloads != null
-                          ? ` · ${hit.downloads.toLocaleString()} downloads`
-                          : ""}
-                      </span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </div>
       </div>
 
       <div className="table-bar">
-        <div className="chips">
-          {JOBS.map((j) => (
+        <div className="chips chips-jobs">
+          <button
+            type="button"
+            className={job === null ? "chip on" : "chip"}
+            onClick={() => setJob(null)}
+          >
+            any
+          </button>
+          <span className="chip-split" aria-hidden="true" />
+          {JOB_MULTIMODAL.map((j) => (
             <button
-              key={String(j.id)}
+              key={j.id}
               type="button"
               className={job === j.id ? "chip on" : "chip"}
               onClick={() => setJob(j.id)}
@@ -413,7 +402,30 @@ export function Desk() {
               {j.label}
             </button>
           ))}
-          <span className="chip-gap" />
+          <span className="chip-split" aria-hidden="true" />
+          {JOB_LANG.map((j) => (
+            <button
+              key={j.id}
+              type="button"
+              className={job === j.id ? "chip on" : "chip"}
+              onClick={() => setJob(j.id)}
+            >
+              {j.label}
+            </button>
+          ))}
+          <span className="chip-spacer" aria-hidden="true" />
+          {JOB_CV.map((j) => (
+            <button
+              key={j.id}
+              type="button"
+              className={job === j.id ? "chip on" : "chip"}
+              onClick={() => setJob(j.id)}
+            >
+              {j.label}
+            </button>
+          ))}
+        </div>
+        <div className="chips chips-mode">
           <button
             type="button"
             className={mode === "infer" ? "chip on" : "chip"}
@@ -428,76 +440,124 @@ export function Desk() {
           >
             train
           </button>
-          <button
-            type="button"
-            className={showNo ? "chip on" : "chip"}
-            onClick={() => setShowNo((v) => !v)}
-          >
-            {showNo ? "hide no" : "show no"}
-          </button>
         </div>
+        <label className="field table-filter-label" htmlFor="name-filter">
+          Filter names
+        </label>
+        <input
+          id="name-filter"
+          type="search"
+          className="table-filter"
+          placeholder="qwen, llama, mistral…"
+          value={nameFilter}
+          autoComplete="off"
+          onChange={(e) => setNameFilter(e.target.value)}
+        />
       </div>
 
       <table className="results">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Size</th>
-            <th>Quant</th>
-            <th>Fit</th>
-            <th>tok/s</th>
-            <th>Hub</th>
+            <SortTh
+              id="name"
+              label="Name"
+              sortKey={sortKey}
+              sortDir={sortDir}
+              onSort={onSort}
+            />
+            <SortTh
+              id="params"
+              label="Params"
+              title="Parameter count (7B), not gigabytes"
+              sortKey={sortKey}
+              sortDir={sortDir}
+              onSort={onSort}
+            />
+            <SortTh
+              id="gb"
+              label="GB"
+              title="Working set on this SKU (weights + KV + overhead)"
+              sortKey={sortKey}
+              sortDir={sortDir}
+              onSort={onSort}
+            />
+            <SortTh
+              id="quant"
+              label="Quant"
+              sortKey={sortKey}
+              sortDir={sortDir}
+              onSort={onSort}
+            />
+            <SortTh
+              id="fit"
+              label="Fit"
+              sortKey={sortKey}
+              sortDir={sortDir}
+              onSort={onSort}
+            />
+            <SortTh
+              id="toks"
+              label="tok/s"
+              title="Estimate: memory bandwidth ÷ working set × efficiency. Not a measured bench."
+              sortKey={sortKey}
+              sortDir={sortDir}
+              onSort={onSort}
+            />
+            <th
+              className="speed-th"
+              title="Color bar of the same estimate. Red crawl, amber usable, green snappy. Full bar ≈ 90 tok/s."
+            >
+              Speed
+            </th>
           </tr>
         </thead>
         <tbody>
           {rows.map((row) => {
             const id = row.model.hf ?? row.model.id;
-            const isPasted = pasted ? sameModel(row.model, pasted.model) : false;
+            const toks = row.tokensPerSec;
             return (
-              <tr key={row.model.id} className={isPasted ? "pasted" : undefined}>
+              <tr key={row.model.id} className={`band-row ${row.band}`}>
                 <td>
-                  {isPasted && (
-                    <span className="ref" title="From the Hugging Face link you pasted">
-                      *{" "}
-                    </span>
-                  )}
-                  {row.model.name}
+                  <a
+                    href={hfUrl(id)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="model-link"
+                  >
+                    <HfLogo size={14} className="hf-mark" />
+                    {row.model.name}
+                  </a>
                 </td>
                 <td>{sizeLabel(row.model.paramsB)}</td>
+                <td>{row.gb}</td>
                 <td>{row.quant ?? "—"}</td>
                 <td>
                   <span className={`band ${row.band}`}>{row.band}</span>
                 </td>
                 <td className="est">
-                  {row.tokensPerSec == null
-                    ? "—"
-                    : `est. ${Math.round(row.tokensPerSec)}`}
+                  {toks == null ? "—" : `est. ${Math.round(toks)}`}
                 </td>
-                <td>
-                  <a href={hfUrl(id)} target="_blank" rel="noreferrer">
-                    {id}
-                  </a>
+                <td className="speed-cell">
+                  <SpeedBar toks={toks} />
                 </td>
               </tr>
             );
           })}
-          {pasted && (
-            <tr className="math-row">
-              <td colSpan={6}>
-                weights {pasted.result.breakdown.weightsGb} GB · KV{" "}
-                {pasted.result.breakdown.kvCacheGb} GB · overhead{" "}
-                {pasted.result.breakdown.overheadGb} GB · extra{" "}
-                {pasted.result.breakdown.extraGb} GB · total {pasted.result.gb}{" "}
-                GB / {pasted.result.breakdown.availableGb} GB available
-                <span className="hint"> {pasted.result.note}</span>
-              </td>
-            </tr>
-          )}
         </tbody>
       </table>
       {rows.length === 0 && (
         <p className="hint">Nothing in the catalog fits this filter.</p>
       )}
+      </div>
+
+      <div
+        id="panel-model"
+        role="tabpanel"
+        aria-labelledby="tab-model"
+        hidden={tab !== "model"}
+      >
+        <ModelTab />
+      </div>
     </>
   );
 }

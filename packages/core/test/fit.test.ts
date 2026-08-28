@@ -9,7 +9,7 @@ import {
   kvCacheGb,
   weightsGb,
 } from "../src/memory";
-import { rank } from "../src/rank";
+import { rank, rankHardware } from "../src/rank";
 import type { Hardware, Model } from "../src/types";
 
 const gpu8: Hardware = {
@@ -183,6 +183,18 @@ describe("rank()", () => {
   });
 });
 
+describe("rankHardware()", () => {
+  it("lists cards that can run a 7B and hides a 2GB card", () => {
+    const tiny: Hardware = { ...gpu8, id: "2gb", name: "2GB", memoryGb: 2 };
+    const rows = rankHardware(llama7, [gpu8, m4, tiny]);
+    expect(rows.every((r) => r.band !== "no")).toBe(true);
+    expect(rows.map((r) => r.hardware.id)).toEqual(
+      expect.arrayContaining(["rtx-4060", "m4-16"]),
+    );
+    expect(rows.some((r) => r.hardware.id === "2gb")).toBe(false);
+  });
+});
+
 function BAND_INDEX(band: string): number {
   return { perfect: 0, good: 1, tight: 2, no: 3 }[band] ?? 9;
 }
@@ -197,6 +209,11 @@ describe("matchIntent()", () => {
   it("maps detect and train", () => {
     expect(matchIntent("yolo detector").jobs).toContain("detect");
     expect(matchIntent("I want to fine-tune a 7B").mode).toBe("train");
+  });
+
+  it("maps tool calling", () => {
+    expect(matchIntent("tool calling agent").jobs).toContain("tools");
+    expect(matchIntent("function-calling").jobs).toContain("tools");
   });
 });
 
@@ -240,5 +257,18 @@ describe("parseHfRepo / modelFromHub", () => {
     expect(model.jobs).toContain("vision");
     expect(model.paramsB).toBeCloseTo(8.3, 1);
     expect(model.arch?.nLayers).toBe(28);
+  });
+
+  it("maps function-calling tags to tools", () => {
+    const model = modelFromHub({
+      id: "Qwen/Qwen2.5-7B-Instruct",
+      pipeline_tag: "text-generation",
+      tags: ["function-calling"],
+      safetensors: { total: 15.2e9, parameters: { BF16: 7.62e9 } },
+      cardData: { license: "apache-2.0" },
+    });
+    expect(model.kind).toBe("llm");
+    expect(model.jobs).toContain("chat");
+    expect(model.jobs).toContain("tools");
   });
 });

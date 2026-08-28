@@ -7,6 +7,7 @@ export type Job =
   | "coding"
   | "chat"
   | "reasoning"
+  | "tools"
   | "embeddings"
   | "speech";
 export type RunMode = "infer" | "train";
@@ -76,6 +77,10 @@ export type FitResult = {
 
 export type RankedFit = FitResult & {
   model: Model;
+};
+
+export type RankedHardware = FitResult & {
+  hardware: Hardware;
 };
 
 export type RankOptions = FitOptions & {

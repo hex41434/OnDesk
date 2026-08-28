@@ -5,7 +5,8 @@
     "paramsB": 0.49,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -22,7 +23,8 @@
     "paramsB": 1.54,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -39,7 +41,8 @@
     "paramsB": 3.09,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -56,7 +59,8 @@
     "paramsB": 7.62,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -73,7 +77,8 @@
     "paramsB": 14.7,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -90,7 +95,8 @@
     "paramsB": 32.8,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -107,7 +113,8 @@
     "paramsB": 72.7,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -125,7 +132,8 @@
     "kind": "llm",
     "jobs": [
       "coding",
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -143,7 +151,8 @@
     "kind": "llm",
     "jobs": [
       "coding",
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -161,7 +170,8 @@
     "kind": "llm",
     "jobs": [
       "coding",
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -179,7 +189,8 @@
     "kind": "llm",
     "jobs": [
       "coding",
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -197,7 +208,8 @@
     "kind": "llm",
     "jobs": [
       "coding",
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -214,7 +226,8 @@
     "paramsB": 3.75,
     "kind": "vlm",
     "jobs": [
-      "vision"
+      "vision",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -231,7 +244,8 @@
     "paramsB": 8.29,
     "kind": "vlm",
     "jobs": [
-      "vision"
+      "vision",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -248,7 +262,8 @@
     "paramsB": 33.0,
     "kind": "vlm",
     "jobs": [
-      "vision"
+      "vision",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -265,7 +280,8 @@
     "paramsB": 73.4,
     "kind": "vlm",
     "jobs": [
-      "vision"
+      "vision",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -283,7 +299,8 @@
     "kind": "llm",
     "jobs": [
       "chat",
-      "reasoning"
+      "reasoning",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -301,7 +318,8 @@
     "kind": "llm",
     "jobs": [
       "chat",
-      "reasoning"
+      "reasoning",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -319,7 +337,8 @@
     "kind": "llm",
     "jobs": [
       "chat",
-      "reasoning"
+      "reasoning",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -337,7 +356,8 @@
     "kind": "llm",
     "jobs": [
       "chat",
-      "reasoning"
+      "reasoning",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -355,7 +375,8 @@
     "kind": "llm",
     "jobs": [
       "chat",
-      "reasoning"
+      "reasoning",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -372,7 +393,8 @@
     "paramsB": 1.24,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "llama3.2",
     "gguf": true,
@@ -389,7 +411,8 @@
     "paramsB": 3.21,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "llama3.2",
     "gguf": true,
@@ -406,7 +429,8 @@
     "paramsB": 8.03,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "llama3.1",
     "gguf": true,
@@ -423,7 +447,8 @@
     "paramsB": 70.6,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "llama3.1",
     "gguf": true,
@@ -440,7 +465,8 @@
     "paramsB": 405.0,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "llama3.1",
     "gguf": true,
@@ -457,7 +483,8 @@
     "paramsB": 70.6,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "llama3.3",
     "gguf": true,
@@ -474,7 +501,8 @@
     "paramsB": 10.6,
     "kind": "vlm",
     "jobs": [
-      "vision"
+      "vision",
+      "tools"
     ],
     "license": "llama3.2",
     "gguf": true,
@@ -491,7 +519,8 @@
     "paramsB": 88.6,
     "kind": "vlm",
     "jobs": [
-      "vision"
+      "vision",
+      "tools"
     ],
     "license": "llama3.2",
     "gguf": true,
@@ -508,7 +537,8 @@
     "paramsB": 7.25,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -525,7 +555,8 @@
     "paramsB": 12.2,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -542,7 +573,8 @@
     "paramsB": 23.6,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -559,7 +591,8 @@
     "paramsB": 46.7,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -576,7 +609,8 @@
     "paramsB": 141.0,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -593,7 +627,8 @@
     "paramsB": 22.2,
     "kind": "llm",
     "jobs": [
-      "coding"
+      "coding",
+      "tools"
     ],
     "license": "mistral-non-prod",
     "gguf": true,
@@ -610,7 +645,8 @@
     "paramsB": 12.4,
     "kind": "vlm",
     "jobs": [
-      "vision"
+      "vision",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -818,7 +854,8 @@
     "kind": "llm",
     "jobs": [
       "chat",
-      "reasoning"
+      "reasoning",
+      "tools"
     ],
     "license": "mit",
     "gguf": true,
@@ -835,7 +872,8 @@
     "paramsB": 3.84,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "mit",
     "gguf": true,
@@ -994,7 +1032,8 @@
     "paramsB": 15.7,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "deepseek",
     "gguf": true,
@@ -1012,7 +1051,8 @@
     "kind": "llm",
     "jobs": [
       "chat",
-      "reasoning"
+      "reasoning",
+      "tools"
     ],
     "license": "mit",
     "gguf": true,
@@ -1098,7 +1138,8 @@
     "paramsB": 35.0,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "cc-by-nc-4.0",
     "gguf": true,
@@ -1115,7 +1156,8 @@
     "paramsB": 104.0,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "cc-by-nc-4.0",
     "gguf": true,
@@ -1132,7 +1174,8 @@
     "paramsB": 4.19,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "nvidia-open-model",
     "gguf": true,
@@ -1251,7 +1294,8 @@
     "paramsB": 7.24,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,
@@ -1302,7 +1346,8 @@
     "paramsB": 8.03,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "cc-by-nc-4.0",
     "gguf": true,
@@ -1319,7 +1364,8 @@
     "paramsB": 32.3,
     "kind": "llm",
     "jobs": [
-      "chat"
+      "chat",
+      "tools"
     ],
     "license": "cc-by-nc-4.0",
     "gguf": true,
@@ -1405,7 +1451,8 @@
     "kind": "llm",
     "jobs": [
       "chat",
-      "coding"
+      "coding",
+      "tools"
     ],
     "license": "apache-2.0",
     "gguf": true,

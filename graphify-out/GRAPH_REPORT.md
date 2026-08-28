@@ -1,16 +1,16 @@
-# Graph Report - fitwatch  (2026-08-27)
+# Graph Report - fitwatch  (2026-08-29)
 
 ## Corpus Check
-- 39 files · ~16,418 words
+- 45 files · ~19,101 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 236 nodes · 352 edges · 22 communities (19 shown, 3 thin omitted)
-- Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 5 edges (avg confidence: 0.8)
+- 279 nodes · 436 edges · 22 communities (19 shown, 3 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 7 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e1ede0e3`
+- Built from commit: `521fff43`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -38,25 +38,25 @@
 1. `OnDesk` - 16 edges
 2. `Story` - 13 edges
 3. `compilerOptions` - 12 edges
-4. `scoreQuant()` - 9 edges
-5. `fit()` - 8 edges
-6. `compilerOptions` - 7 edges
-7. `modelFromHub()` - 7 edges
-8. `Hardware` - 7 edges
+4. `fit()` - 10 edges
+5. `scoreQuant()` - 9 edges
+6. `Hardware` - 9 edges
+7. `compilerOptions` - 7 edges
+8. `modelFromHub()` - 7 edges
 9. `Model` - 7 edges
-10. `findHardware()` - 6 edges
+10. `SpeedBar()` - 6 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `GET()` --calls--> `modelFromHub()`  [INFERRED]
-  apps/web/app/api/hf/route.ts → packages/core/src/hub.ts
-- `POST()` --calls--> `findHardware()`  [INFERRED]
-  apps/web/app/api/search-hardware/route.ts → packages/core/src/hardware.ts
-- `Desk()` --calls--> `fit()`  [INFERRED]
-  apps/web/app/desk.tsx → packages/core/src/fit.ts
-- `GET()` --calls--> `parseHfRepo()`  [INFERRED]
-  apps/web/app/api/hf/route.ts → packages/core/src/hub.ts
 - `hubSearch()` --calls--> `parseHfRepo()`  [INFERRED]
   apps/web/app/api/search-models/route.ts → packages/core/src/hub.ts
+- `Desk()` --calls--> `companionLine()`  [INFERRED]
+  apps/web/app/desk.tsx → packages/core/src/companion.ts
+- `Desk()` --calls--> `fit()`  [INFERRED]
+  apps/web/app/desk.tsx → packages/core/src/fit.ts
+- `ModelTab()` --calls--> `fit()`  [INFERRED]
+  apps/web/app/model-tab.tsx → packages/core/src/fit.ts
+- `GET()` --calls--> `modelFromHub()`  [INFERRED]
+  apps/web/app/api/hf/route.ts → packages/core/src/hub.ts
 
 ## Import Cycles
 - None detected.
@@ -64,16 +64,16 @@
 ## Communities (22 total, 3 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.13
-Nodes (28): gpus, models, archFromConfig(), kindAndJobs(), modelFromHub(), paramsFromCard(), Intent, JOB_WORDS (+20 more)
+Cohesion: 0.36
+Nodes (7): GET(), archFromConfig(), hasToolCalling(), kindAndJobs(), modelFromHub(), paramsFromCard(), parseHfRepo()
 
 ### Community 1 - "Community 1"
 Cohesion: 0.10
 Nodes (20): Four-week ship plan, How scoring should work (honest, explainable), Later, if it has a pulse, Name, Next concrete step, OnDesk, One-liner, Open source, on purpose (+12 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.17
-Nodes (20): extraGb(), fit(), quantsFor(), scoreQuant(), SPEED_EFFICIENCY, availableGb(), bandFor(), BITS_PER_WEIGHT (+12 more)
+Cohesion: 0.09
+Nodes (46): gpus, models, extraGb(), fit(), quantsFor(), scoreQuant(), SPEED_EFFICIENCY, Intent (+38 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.11
@@ -96,16 +96,16 @@ Cohesion: 0.15
 Nodes (12): compilerOptions, esModuleInterop, isolatedModules, lib, module, moduleResolution, noEmit, noUncheckedIndexedAccess (+4 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.70
-Nodes (4): findHardware(), hardwareById(), norm(), tokens()
+Cohesion: 0.24
+Nodes (10): appleCpu(), Companion, companionFor(), companionLine(), discreteCpu(), discreteRam(), cpu32, gpu24 (+2 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.17
 Nodes (11): compilerOptions, allowJs, incremental, jsx, lib, paths, plugins, exclude (+3 more)
 
 ### Community 10 - "Community 10"
-Cohesion: 0.22
-Nodes (5): Desk(), JOBS, sizeLabel(), jsonAuthHeaders(), readBrowserKey()
+Cohesion: 0.08
+Nodes (25): BAND_SORT, Desk(), DeskTab, JOB_CV, JOB_LANG, JOB_MULTIMODAL, QUANT_SORT, sizeLabel() (+17 more)
 
 ### Community 11 - "Community 11"
 Cohesion: 0.33
@@ -120,28 +120,28 @@ Cohesion: 0.33
 Nodes (5): License, OnDesk, Quick start, Repo, What you get
 
 ### Community 21 - "Community 21"
-Cohesion: 0.21
-Nodes (13): GET(), extractJsonObject(), GEMINI_MODELS, geminiJson(), JOBS, mapHardwareQuery(), mapModelQuery(), resolveGeminiKey() (+5 more)
+Cohesion: 0.19
+Nodes (15): extractJsonObject(), GEMINI_MODELS, geminiJson(), JOBS, mapHardwareQuery(), mapModelQuery(), resolveGeminiKey(), POST() (+7 more)
 
 ## Knowledge Gaps
-- **116 isolated node(s):** `HubHit`, `JOBS`, `Entry`, `Week`, `weeks` (+111 more)
+- **130 isolated node(s):** `HubHit`, `JOB_MULTIMODAL`, `JOB_CV`, `JOB_LANG`, `SortKey` (+125 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `fit()` connect `Community 2` to `Community 0`, `Community 10`?**
-  _High betweenness centrality (0.040) - this node is a cross-community bridge._
-- **Why does `Desk()` connect `Community 10` to `Community 2`?**
-  _High betweenness centrality (0.036) - this node is a cross-community bridge._
-- **Why does `findHardware()` connect `Community 8` to `Community 0`, `Community 2`, `Community 21`?**
-  _High betweenness centrality (0.025) - this node is a cross-community bridge._
-- **What connects `HubHit`, `JOBS`, `Entry` to the rest of the system?**
-  _116 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.12912912912912913 - nodes in this community are weakly interconnected._
+- **Why does `fit()` connect `Community 2` to `Community 10`?**
+  _High betweenness centrality (0.083) - this node is a cross-community bridge._
+- **Why does `ModelTab()` connect `Community 10` to `Community 2`?**
+  _High betweenness centrality (0.053) - this node is a cross-community bridge._
+- **Why does `Desk()` connect `Community 10` to `Community 8`, `Community 2`?**
+  _High betweenness centrality (0.047) - this node is a cross-community bridge._
+- **Are the 2 inferred relationships involving `fit()` (e.g. with `Desk()` and `ModelTab()`) actually correct?**
+  _`fit()` has 2 INFERRED edges - model-reasoned connections that need verification._
+- **What connects `HubHit`, `JOB_MULTIMODAL`, `JOB_CV` to the rest of the system?**
+  _130 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
-- **Should `Community 3` be split into smaller, more focused modules?**
-  _Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected._
+- **Should `Community 2` be split into smaller, more focused modules?**
+  _Cohesion score 0.09376890502117362 - nodes in this community are weakly interconnected._

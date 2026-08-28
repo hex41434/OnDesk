@@ -1,10 +1,12 @@
-export type { Architecture, FitBand, FitBreakdown, FitOptions, FitResult, Hardware, HubCard, HubConfig, Job, Maker, MemoryKind, Model, ModelKind, Quant, RankOptions, RankedFit, RunMode } from "./types";
+export type { Architecture, FitBand, FitBreakdown, FitOptions, FitResult, Hardware, HubCard, HubConfig, Job, Maker, MemoryKind, Model, ModelKind, Quant, RankOptions, RankedFit, RankedHardware, RunMode } from "./types";
 
 export { fit } from "./fit";
-export { rank } from "./rank";
+export { rank, rankHardware } from "./rank";
 export { matchIntent } from "./intent";
 export type { Intent } from "./intent";
 export { findHardware, hardwareById } from "./hardware";
+export { companionFor, companionLine } from "./companion";
+export type { Companion } from "./companion";
 export { modelFromHub, parseHfRepo } from "./hub";
 export { gpus, models } from "./catalog";
 export {

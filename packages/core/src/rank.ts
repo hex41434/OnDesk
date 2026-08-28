@@ -1,6 +1,13 @@
 import { fit } from "./fit";
 import { matchIntent } from "./intent";
-import type { Hardware, Model, RankOptions, RankedFit } from "./types";
+import type {
+  FitOptions,
+  Hardware,
+  Model,
+  RankOptions,
+  RankedFit,
+  RankedHardware,
+} from "./types";
 
 const BAND_ORDER = { perfect: 0, good: 1, tight: 2, no: 3 } as const;
 
@@ -44,9 +51,46 @@ export function rank(
   rows.sort((a, b) => {
     const band = BAND_ORDER[a.band] - BAND_ORDER[b.band];
     if (band !== 0) return band;
-    const size = a.model.paramsB - b.model.paramsB;
-    if (Math.abs(size) > 0.05) return -size;
-    return a.gb - b.gb;
+    const size = b.model.paramsB - a.model.paramsB;
+    if (size !== 0) return size;
+    const gb = b.gb - a.gb;
+    if (gb !== 0) return gb;
+    if (a.model.id < b.model.id) return -1;
+    if (a.model.id > b.model.id) return 1;
+    return 0;
+  });
+
+  return rows;
+}
+
+/**
+ * Rank hardware for one model. Cards that cannot run it are hidden
+ * unless `hideNo` is false.
+ */
+export function rankHardware(
+  model: Model,
+  hardware: Hardware[],
+  options: FitOptions & { hideNo?: boolean } = {},
+): RankedHardware[] {
+  const hideNo = options.hideNo ?? true;
+  const rows: RankedHardware[] = [];
+
+  for (const hw of hardware) {
+    const result = fit(model, hw, options);
+    if (hideNo && result.band === "no") continue;
+    rows.push({ ...result, hardware: hw });
+  }
+
+  rows.sort((a, b) => {
+    const band = BAND_ORDER[a.band] - BAND_ORDER[b.band];
+    if (band !== 0) return band;
+    const speed = (b.tokensPerSec ?? -1) - (a.tokensPerSec ?? -1);
+    if (speed !== 0) return speed;
+    const mem = b.hardware.memoryGb - a.hardware.memoryGb;
+    if (mem !== 0) return mem;
+    if (a.hardware.id < b.hardware.id) return -1;
+    if (a.hardware.id > b.hardware.id) return 1;
+    return 0;
   });
 
   return rows;

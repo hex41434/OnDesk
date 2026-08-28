@@ -54,6 +54,17 @@ const JOB_WORDS: { job: Job; words: string[] }[] = [
     job: "chat",
     words: ["chat", "instruct", "assistant", "talk", "write"],
   },
+  {
+    job: "tools",
+    words: [
+      "tool call",
+      "tool-call",
+      "tool use",
+      "tool-use",
+      "function call",
+      "function-call",
+    ],
+  },
 ];
 
 /**

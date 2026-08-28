@@ -9,6 +9,7 @@ export const JOBS: Job[] = [
   "coding",
   "chat",
   "reasoning",
+  "tools",
   "embeddings",
   "speech",
 ];
@@ -77,7 +78,7 @@ export async function mapModelQuery(
 The request may be Persian, English, or informal.
 Return JSON only: {"search":"short English Hub query","job":"coding"|null}
 "search" is identifiers/names (Qwen2.5-Coder), not a sentence.
-"job" is one of: vision, detect, segment, coding, chat, reasoning, embeddings, speech — or null.
+"job" is one of: vision, detect, segment, coding, chat, reasoning, tools, embeddings, speech — or null.
 Do not mention VRAM, GB, tok/s, or whether a model fits.
 
 User: ${query}`,

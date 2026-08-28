@@ -31,7 +31,7 @@ export function findHardware(
       return { hw, score };
     })
     .filter((x) => x.score > 0)
-    .sort((a, b) => b.score - a.score);
+    .sort((a, b) => b.score - a.score || (a.hw.id < b.hw.id ? -1 : 1));
 
   return scored.map((x) => x.hw);
 }
