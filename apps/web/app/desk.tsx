@@ -17,6 +17,7 @@ import {
 } from "@ondesk/core";
 import { jsonAuthHeaders } from "../lib/browser-key";
 import { HfLogo } from "../components/hf-logo";
+import { quantLabel, sizeLabel } from "../lib/labels";
 import { SortTh, type SortDir } from "../components/sort-th";
 import { SpeedBar } from "../components/speed-bar";
 import { ModelTab } from "./model-tab";
@@ -83,13 +84,6 @@ function sortRows(rows: RankedFit[], key: SortKey, dir: SortDir): RankedFit[] {
 
 function hfUrl(id: string): string {
   return `https://huggingface.co/${id}`;
-}
-
-function sizeLabel(paramsB: number): string {
-  if (paramsB >= 100) return `${paramsB.toFixed(0)}B`;
-  if (paramsB >= 1) return `${paramsB.toFixed(paramsB >= 10 ? 0 : 1)}B`;
-  if (paramsB >= 0.1) return `${Math.round(paramsB * 1000)}M`;
-  return `${Math.round(paramsB * 1e9).toLocaleString("en-US")} params`;
 }
 
 function nameHit(model: Model, query: string): boolean {
@@ -225,9 +219,7 @@ export function Desk() {
       <h1 className="lede">What fits on the desk. Not in the cloud.</h1>
       <p className="sub">
         Pick a GPU, or open Model and search a repo. Fit numbers are ours, not
-        Gemini. Cite{" "}
-        <a href="https://github.com/AlexsJones/llmfit">llmfit</a> as prior art
-        for local scoring; this page answers the question before you buy.
+        Gemini. This page answers the question before you buy.
       </p>
       <p className="hf-badge">
         <HfLogo size={18} />
@@ -530,7 +522,7 @@ export function Desk() {
                 </td>
                 <td>{sizeLabel(row.model.paramsB)}</td>
                 <td>{row.gb}</td>
-                <td>{row.quant ?? "—"}</td>
+                <td>{quantLabel(row.quant)}</td>
                 <td>
                   <span className={`band ${row.band}`}>{row.band}</span>
                 </td>

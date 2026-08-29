@@ -381,7 +381,15 @@ input.table-filter { max-width: 22rem; }
   align-self: center;
 }
 
-table.results tr.pasted td { box-shadow: inset 3px 0 0 var(--accent); }
+table.results tr.pasted td,
+table.results tr.band-row.mine td { box-shadow: inset 3px 0 0 var(--accent); }
+.mine-mark {
+  color: var(--accent);
+  margin-right: 0.3rem;
+  font-weight: 600;
+}
+.chips.model-tags { margin: 0.35rem 0 0.55rem; }
+span.chip.tag { cursor: default; }
 table.results tr.math-row td {
   color: var(--muted);
   font-size: 0.85rem;
@@ -390,3 +398,10 @@ table.results tr.math-row td {
   padding-bottom: 0.85rem;
 }
 table.results tr.math-row .hint { margin: 0.25rem 0 0; display: block; }
+.fit-math {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  margin: 0 0 0.75rem;
+}
+.fit-math .hint { margin: 0.25rem 0 0; display: block; }

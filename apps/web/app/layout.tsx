@@ -29,9 +29,6 @@ export default function RootLayout({
               OnDesk
             </Link>
             <nav className="nav">
-              <Link href="/">Fit</Link>
-              <Link href="/about">Formulas</Link>
-              <Link href="/digest">Digest</Link>
               <Link href="/settings">Settings</Link>
             </nav>
           </header>

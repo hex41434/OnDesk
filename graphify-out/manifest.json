@@ -1,7 +1,7 @@
 {
   "apps/web/app/about/page.tsx": {
-    "mtime": 1787680976.4579737,
-    "ast_hash": "c5c44d69c4ecafdaa021a4d36843aee2",
+    "mtime": 1787958634.095707,
+    "ast_hash": "09821f5cf3fb8cef4abb59215cc2225d",
     "semantic_hash": ""
   },
   "apps/web/app/api/hf/route.ts": {
@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   "apps/web/app/desk.tsx": {
-    "mtime": 1787957662.818703,
-    "ast_hash": "dced535b9d2766b7f0feb6edbc913af1",
+    "mtime": 1787958639.014744,
+    "ast_hash": "2e3370b94b4f19f51093a4a27982e9c0",
     "semantic_hash": ""
   },
   "apps/web/app/digest/entries.json": {
@@ -25,8 +25,8 @@
     "semantic_hash": ""
   },
   "apps/web/app/layout.tsx": {
-    "mtime": 1787781433.5610602,
-    "ast_hash": "b7b511995618f3b62d126ed151532a8a",
+    "mtime": 1787958083.4272952,
+    "ast_hash": "39e8a9ce616597fb17c2305cd98d64c5",
     "semantic_hash": ""
   },
   "apps/web/app/page.tsx": {
@@ -90,8 +90,8 @@
     "semantic_hash": ""
   },
   "packages/core/src/hardware.ts": {
-    "mtime": 1787847203.8232102,
-    "ast_hash": "f7f3997e7a3e33202da2ded7d3361c53",
+    "mtime": 1787958075.7147,
+    "ast_hash": "6852d6ef9ccb94b8f033e9a33932fb82",
     "semantic_hash": ""
   },
   "packages/core/src/hub.ts": {
@@ -100,8 +100,8 @@
     "semantic_hash": ""
   },
   "packages/core/src/index.ts": {
-    "mtime": 1787957578.3678641,
-    "ast_hash": "9d6ddd5ff2bbf494fe218ab71131c087",
+    "mtime": 1787958076.0896678,
+    "ast_hash": "dcb793487eb71dd27e1d9b92d93ba139",
     "semantic_hash": ""
   },
   "packages/core/src/intent.ts": {
@@ -125,8 +125,8 @@
     "semantic_hash": ""
   },
   "packages/core/test/catalog.test.ts": {
-    "mtime": 1787957580.086425,
-    "ast_hash": "1089850c970e37ff8ff93174efdaf185",
+    "mtime": 1787958077.0093186,
+    "ast_hash": "a7557533b4b9e917574381939c6c409e",
     "semantic_hash": ""
   },
   "packages/core/test/fit.test.ts": {
@@ -210,8 +210,8 @@
     "semantic_hash": ""
   },
   "apps/web/app/model-tab.tsx": {
-    "mtime": 1787957628.4060097,
-    "ast_hash": "a6e13f78b247940d5a3c912c12be2077",
+    "mtime": 1787958682.1848266,
+    "ast_hash": "860dcf02ff3c46f2efe5ca150a1f62ca",
     "semantic_hash": ""
   },
   "apps/web/components/sort-th.tsx": {
@@ -222,6 +222,21 @@
   "apps/web/components/speed-bar.tsx": {
     "mtime": 1787957588.0525653,
     "ast_hash": "041c3b05643825ea7e1bdeba663da7f0",
+    "semantic_hash": ""
+  },
+  "apps/web/app/api/host-hardware/route.ts": {
+    "mtime": 1787958080.071608,
+    "ast_hash": "3bc5c31add8f2a31ccc98c194eb0eaff",
+    "semantic_hash": ""
+  },
+  "apps/web/lib/job-labels.ts": {
+    "mtime": 1787958077.6576936,
+    "ast_hash": "84a6e895347f86e47e39cc4a0a1914e0",
+    "semantic_hash": ""
+  },
+  "apps/web/lib/labels.ts": {
+    "mtime": 1787958631.2863343,
+    "ast_hash": "3c98e42e4c9552c8c4a5d2c4b386880f",
     "semantic_hash": ""
   }
 }

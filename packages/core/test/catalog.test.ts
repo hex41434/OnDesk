@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { gpus, models, rank, rankHardware } from "../src/index";
+import { gpus, matchHostSku, models, rank, rankHardware } from "../src/index";
 
 describe("catalog", () => {
   it("has enough SKUs and models to demo", () => {
@@ -23,6 +23,10 @@ describe("catalog", () => {
     const a = rank(models, gpu).map((r) => r.model.id);
     const b = rank(models, gpu).map((r) => r.model.id);
     expect(a).toEqual(b);
+  });
+
+  it("matchHostSku maps Apple M4 16GB", () => {
+    expect(matchHostSku("Apple M4", 16, gpus)?.id).toBe("m4-16");
   });
 
   it("Qwen2.5 7B has matching hardware", () => {

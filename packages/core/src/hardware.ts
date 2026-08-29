@@ -42,3 +42,41 @@ export function hardwareById(
 ): Hardware | undefined {
   return catalog.find((h) => h.id === id);
 }
+
+const GENERIC = new Set([
+  "apple",
+  "nvidia",
+  "amd",
+  "geforce",
+  "radeon",
+  "chip",
+  "gpu",
+  "graphics",
+  "intel",
+  "core",
+  "metal",
+  "silicon",
+]);
+
+/**
+ * Map a host probe (chip string + RAM) to the closest catalog SKU.
+ * "Apple M4" + 16 → M4 16GB. Generic vendor words are ignored.
+ */
+export function matchHostSku(
+  hint: string,
+  memoryGb: number | null,
+  catalog: Hardware[],
+): Hardware | undefined {
+  const keys = tokens(hint).filter((t) => !GENERIC.has(t) && t.length > 1);
+  const q = [keys.join(" "), memoryGb != null ? String(memoryGb) : ""]
+    .filter(Boolean)
+    .join(" ");
+  const hits = findHardware(q || hint, catalog);
+  if (!hits.length) return undefined;
+  if (memoryGb == null) return hits[0];
+  return hits.reduce((best, hw) =>
+    Math.abs(hw.memoryGb - memoryGb) < Math.abs(best.memoryGb - memoryGb)
+      ? hw
+      : best,
+  );
+}

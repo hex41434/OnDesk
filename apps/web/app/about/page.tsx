@@ -42,11 +42,9 @@ export default function AboutPage() {
 
       <h2>What this is not</h2>
       <p>
-        Not Ollama. Not a scrape of every Hub repo. Not llmfit (which scores
-        the machine you already have, from a baked catalog).{" "}
-        <a href="https://github.com/AlexsJones/llmfit">llmfit</a> is prior art.
-        OnDesk is the other moment: before you buy, and when something new
-        actually fits the desk.
+        Not Ollama. Not a scrape of every Hub repo. Not a measured bench. Host
+        hardware is read from this machine (chip + RAM), then matched to the
+        catalog. Same SKU, same numbers.
       </p>
     </article>
   );

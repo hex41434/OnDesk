@@ -4,7 +4,7 @@ export { fit } from "./fit";
 export { rank, rankHardware } from "./rank";
 export { matchIntent } from "./intent";
 export type { Intent } from "./intent";
-export { findHardware, hardwareById } from "./hardware";
+export { findHardware, hardwareById, matchHostSku } from "./hardware";
 export { companionFor, companionLine } from "./companion";
 export type { Companion } from "./companion";
 export { modelFromHub, parseHfRepo } from "./hub";

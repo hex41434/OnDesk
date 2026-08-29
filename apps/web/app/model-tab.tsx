@@ -1,18 +1,21 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   fit,
   gpus,
   models,
   parseHfRepo,
   rankHardware,
+  type Hardware,
   type Model,
   type Quant,
   type RankedHardware,
   type RunMode,
 } from "@ondesk/core";
 import { jsonAuthHeaders } from "../lib/browser-key";
+import { JOB_LABEL } from "../lib/job-labels";
+import { modelMeta, quantLabel, sizeLabel } from "../lib/labels";
 import { HfLogo } from "../components/hf-logo";
 import { SortTh, type SortDir } from "../components/sort-th";
 import { SpeedBar } from "../components/speed-bar";
@@ -51,11 +54,13 @@ function nameHit(model: Model, query: string): boolean {
   );
 }
 
-function sizeLabel(paramsB: number): string {
-  if (paramsB >= 100) return `${paramsB.toFixed(0)}B`;
-  if (paramsB >= 1) return `${paramsB.toFixed(paramsB >= 10 ? 0 : 1)}B`;
-  if (paramsB >= 0.1) return `${Math.round(paramsB * 1000)}M`;
-  return `${Math.round(paramsB * 1e9).toLocaleString("en-US")} params`;
+function hwHit(hw: Hardware, query: string): boolean {
+  const q = query.toLowerCase();
+  return (
+    hw.name.toLowerCase().includes(q) ||
+    hw.id.toLowerCase().includes(q) ||
+    hw.maker.toLowerCase().includes(q)
+  );
 }
 
 function sortHw(
@@ -96,15 +101,45 @@ export function ModelTab() {
   const [searchHint, setSearchHint] = useState<string | null>(null);
   const [sortKey, setSortKey] = useState<HwSortKey | null>(null);
   const [sortDir, setSortDir] = useState<SortDir>("desc");
+  const [mine, setMine] = useState<Hardware | null>(null);
+  const [hwFilter, setHwFilter] = useState("");
 
-  const ranked = useMemo(
-    () => (picked ? rankHardware(picked, gpus, { mode }) : []),
-    [picked, mode],
-  );
-  const rows = sortKey ? sortHw(ranked, sortKey, sortDir) : ranked;
-  const best = ranked[0];
+  useEffect(() => {
+    let gone = false;
+    void fetch("/api/host-hardware")
+      .then((res) => res.json() as Promise<{ hardware?: Hardware | null }>)
+      .then((body) => {
+        if (!gone && body.hardware) setMine(body.hardware);
+      })
+      .catch(() => {
+        // catalog rank still works
+      });
+    return () => {
+      gone = true;
+    };
+  }, []);
+
+  const ranked = useMemo(() => {
+    if (!picked) return [];
+    const list = rankHardware(picked, gpus, { mode });
+    if (!mine) return list;
+    const i = list.findIndex((r) => r.hardware.id === mine.id);
+    if (i >= 0) {
+      const copy = list.slice();
+      const [row] = copy.splice(i, 1);
+      return [row!, ...copy];
+    }
+    return [{ ...fit(picked, mine, { mode }), hardware: mine }, ...list];
+  }, [picked, mode, mine]);
+  const sorted = sortKey ? sortHw(ranked, sortKey, sortDir) : ranked;
+  const qHw = hwFilter.trim();
+  const rows = qHw ? sorted.filter((r) => hwHit(r.hardware, qHw)) : sorted;
+  const mathHw = mine ?? ranked[0]?.hardware;
   const math =
-    picked && best ? fit(picked, best.hardware, { mode }) : null;
+    picked && mathHw ? fit(picked, mathHw, { mode }) : null;
+  const pickedMeta = picked
+    ? modelMeta(picked.name, picked.paramsB, picked.license)
+    : "";
 
   function onSort(key: HwSortKey) {
     if (sortKey === key) {
@@ -279,11 +314,17 @@ export function ModelTab() {
               <HfLogo size={14} className="hf-mark" />
               {picked.name}
             </a>
-            <span className="est">
-              {" "}
-              · {sizeLabel(picked.paramsB)} · {picked.license}
-            </span>
+            {pickedMeta ? <span className="est"> · {pickedMeta}</span> : null}
           </p>
+          {picked.jobs.length > 0 && (
+            <div className="chips model-tags" aria-label="Model tags">
+              {picked.jobs.map((j) => (
+                <span key={j} className="chip tag">
+                  {JOB_LABEL[j]}
+                </span>
+              ))}
+            </div>
+          )}
           <div className="table-bar">
             <div className="chips chips-mode">
               <button
@@ -301,7 +342,30 @@ export function ModelTab() {
                 train
               </button>
             </div>
+            <label className="field table-filter-label" htmlFor="hw-filter">
+              Filter hardware
+            </label>
+            <input
+              id="hw-filter"
+              type="search"
+              className="table-filter"
+              placeholder="4060, m4, 4090…"
+              value={hwFilter}
+              autoComplete="off"
+              onChange={(e) => setHwFilter(e.target.value)}
+            />
           </div>
+          {math && mathHw && (
+            <p className="fit-math">
+              on {mathHw.name}
+              {mine && mathHw.id === mine.id ? " (this machine)" : ""}: weights{" "}
+              {math.breakdown.weightsGb} GB · KV {math.breakdown.kvCacheGb} GB ·
+              overhead {math.breakdown.overheadGb} GB · extra{" "}
+              {math.breakdown.extraGb} GB · total {math.gb} GB /{" "}
+              {math.breakdown.availableGb} GB available
+              <span className="hint"> {math.note}</span>
+            </p>
+          )}
           <table className="results">
             <thead>
               <tr>
@@ -314,14 +378,15 @@ export function ModelTab() {
                 />
                 <SortTh
                   id="mem"
-                  label="Memory"
+                  label="RAM"
+                  title="Card or unified memory on this SKU"
                   sortKey={sortKey}
                   sortDir={sortDir}
                   onSort={onSort}
                 />
                 <SortTh
                   id="gb"
-                  label="GB"
+                  label="Used"
                   title="Working set on this SKU (weights + KV + overhead)"
                   sortKey={sortKey}
                   sortDir={sortDir}
@@ -360,16 +425,26 @@ export function ModelTab() {
             <tbody>
               {rows.map((row) => {
                 const toks = row.tokensPerSec;
+                const isMine = mine?.id === row.hardware.id;
                 return (
-                  <tr key={row.hardware.id} className={`band-row ${row.band}`}>
+                  <tr
+                    key={row.hardware.id}
+                    className={`band-row ${row.band}${isMine ? " mine" : ""}`}
+                  >
                     <td>
-                      <span className="hw-name">{row.hardware.name}</span>
+                      {isMine && (
+                        <span className="mine-mark" title="This machine">
+                          ★
+                        </span>
+                      )}
+                      <span className="hw-name">
+                        {row.hardware.name}
+                        {isMine ? " · this machine" : ""}
+                      </span>
                     </td>
-                    <td>
-                      {row.hardware.memoryGb} GB {row.hardware.memoryKind}
-                    </td>
+                    <td>{row.hardware.memoryGb} GB</td>
                     <td>{row.gb}</td>
-                    <td>{row.quant ?? "—"}</td>
+                    <td>{quantLabel(row.quant)}</td>
                     <td>
                       <span className={`band ${row.band}`}>{row.band}</span>
                     </td>
@@ -382,18 +457,6 @@ export function ModelTab() {
                   </tr>
                 );
               })}
-              {math && best && (
-                <tr className="math-row">
-                  <td colSpan={7}>
-                    on {best.hardware.name}: weights {math.breakdown.weightsGb}{" "}
-                    GB · KV {math.breakdown.kvCacheGb} GB · overhead{" "}
-                    {math.breakdown.overheadGb} GB · extra {math.breakdown.extraGb}{" "}
-                    GB · total {math.gb} GB / {math.breakdown.availableGb} GB
-                    available
-                    <span className="hint"> {math.note}</span>
-                  </td>
-                </tr>
-              )}
             </tbody>
           </table>
           {rows.length === 0 && (
