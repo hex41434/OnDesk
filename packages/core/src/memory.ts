@@ -24,6 +24,12 @@ export const QUANT_LADDER: Quant[] = [
 
 export const DEFAULT_CONTEXT = 8192;
 
+/** Fixed assumptions for the catalog's quick YOLO estimate. */
+export const YOLO_IMAGE_SIZE = 800;
+export const YOLO_TRAIN_EPOCHS = 100;
+export const YOLO_INFER_BATCH = 1;
+export const YOLO_TRAIN_BATCH = 16;
+
 /** OS / desktop reservation on unified and system memory. */
 export const UNIFIED_USABLE = 0.7;
 export const SYSTEM_USABLE = 0.75;

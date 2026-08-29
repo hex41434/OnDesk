@@ -20,6 +20,7 @@ export default function AboutPage() {
         For detectors, segmentation, speech, and embedding models, activation
         memory is deliberately a rough allowance. Input resolution, batch size,
         framework workspace, and runtime-specific optimizations are not modeled.
+        YOLO uses an 800×800 input assumption; inference assumes batch 1.
       </p>
 
       <h2>Available RAM</h2>
@@ -32,7 +33,9 @@ export default function AboutPage() {
       <p>
         Training results are capacity estimates, not configuration advice. This
         matters especially for vision training, where image size, batch size,
-        optimizer, and augmentation can dominate memory use.
+        optimizer, and augmentation can dominate memory use. YOLO training is
+        estimated at batch 16 for 100 epochs. Epochs affect duration rather than
+        peak memory; total training time is not estimated yet.
       </p>
 
       <h2>Fit bands</h2>

@@ -2,6 +2,10 @@ import {
   DEFAULT_CONTEXT,
   QUANT_LADDER,
   TRAIN_MULTIPLIER,
+  YOLO_IMAGE_SIZE,
+  YOLO_INFER_BATCH,
+  YOLO_TRAIN_BATCH,
+  YOLO_TRAIN_EPOCHS,
   availableGb,
   bandFor,
   kvCacheGb,
@@ -17,16 +21,34 @@ import type {
   Quant,
 } from "./types";
 
+const VISION_BASE_IMAGE_SIZE = 640;
+
 const SPEED_EFFICIENCY: Record<Hardware["memoryKind"], number> = {
   vram: 0.35,
   unified: 0.22,
   system: 0.08,
 };
 
-function extraGb(model: Model): number {
+function isYolo(model: Model): boolean {
+  return (
+    model.id.toLowerCase().startsWith("yolo") ||
+    model.hf?.toLowerCase().includes("ultralytics/yolo") === true
+  );
+}
+
+function extraGb(model: Model, mode: FitOptions["mode"]): number {
   if (model.kind === "vlm") return 0.8;
   if (model.kind === "detector" || model.kind === "segment") {
-    return Math.max(0.4, (model.weightGb ?? model.paramsB * 0.15) * 0.5);
+    if (isYolo(model)) {
+      const resolutionScale = (YOLO_IMAGE_SIZE / VISION_BASE_IMAGE_SIZE) ** 2;
+      const batch = mode === "train" ? YOLO_TRAIN_BATCH : YOLO_INFER_BATCH;
+      return (0.35 + model.paramsB * 10) * resolutionScale * batch;
+    }
+    const base = Math.max(
+      0.4,
+      (model.weightGb ?? model.paramsB * 0.15) * 0.5,
+    );
+    return base;
   }
   if (model.kind === "asr") return 0.3;
   if (model.kind === "embed") return 0.1;
@@ -58,17 +80,22 @@ function scoreQuant(
 
   let weights: number;
   let kv: number;
-  let extra = extraGb(model);
+  let extra = extraGb(model, mode);
   let noteParts: string[] = [];
 
   if (mode === "train") {
     const base = model.weightGb ?? weightsGb(model.paramsB, "fp16");
     weights = base * TRAIN_MULTIPLIER;
     kv = 0;
-    extra = extra * 2;
+    if (!isYolo(model)) extra = extra * 2;
     noteParts.push(
       `training ~${TRAIN_MULTIPLIER}× FP16 weights (optimizer + activations; LoRA not modeled)`,
     );
+    if (isYolo(model)) {
+      noteParts.push(
+        `YOLO assumption: ${YOLO_IMAGE_SIZE}×${YOLO_IMAGE_SIZE}, batch ${YOLO_TRAIN_BATCH}, ${YOLO_TRAIN_EPOCHS} epochs; training time not modeled`,
+      );
+    }
   } else if (
     model.kind === "detector" ||
     model.kind === "segment" ||
@@ -79,6 +106,11 @@ function scoreQuant(
     weights = quant === "fp16" ? fp16 : fp16 * (weightsGb(1, quant) / 2);
     kv = 0;
     noteParts.push("no KV cache; activation memory is a coarse add-on");
+    if (isYolo(model)) {
+      noteParts.push(
+        `YOLO assumption: ${YOLO_IMAGE_SIZE}×${YOLO_IMAGE_SIZE}, batch ${YOLO_INFER_BATCH}`,
+      );
+    }
   } else {
     const useSourceWeights =
       model.weightGb != null &&

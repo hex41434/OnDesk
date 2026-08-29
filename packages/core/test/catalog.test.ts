@@ -13,6 +13,17 @@ describe("catalog", () => {
     expect(gpus.some((g) => g.id === "m4-16")).toBe(true);
   });
 
+  it("includes all five official YOLO26 detector sizes", () => {
+    const ids = models.filter((m) => m.id.startsWith("yolo26")).map((m) => m.id);
+    expect(ids).toEqual([
+      "yolo26n",
+      "yolo26s",
+      "yolo26m",
+      "yolo26l",
+      "yolo26x",
+    ]);
+  });
+
   it("RTX 4060 + vision is a non-embarrassing list", () => {
     const gpu = gpus.find((g) => g.id === "rtx-4060")!;
     const rows = rank(models, gpu, { job: "vision" });

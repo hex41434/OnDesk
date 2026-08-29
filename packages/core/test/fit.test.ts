@@ -133,8 +133,20 @@ describe("fit()", () => {
   it("detectors skip KV cache and tok/s", () => {
     const result = fit(yolo, gpu8);
     expect(result.breakdown.kvCacheGb).toBe(0);
+    expect(result.breakdown.extraGb).toBeCloseTo(0.59, 1);
     expect(result.tokensPerSec).toBeNull();
     expect(result.band).toBe("perfect");
+    expect(result.note).toContain("800×800");
+    expect(result.note).toContain("batch 1");
+  });
+
+  it("labels the fixed YOLO training assumptions without treating epochs as memory", () => {
+    const result = fit(yolo, gpu8, { mode: "train" });
+    expect(result.breakdown.extraGb).toBeGreaterThan(9);
+    expect(result.note).toContain("800×800");
+    expect(result.note).toContain("batch 16");
+    expect(result.note).toContain("100 epochs");
+    expect(result.note).toContain("training time not modeled");
   });
 
   it("labels speed as an estimate, never a measurement", () => {

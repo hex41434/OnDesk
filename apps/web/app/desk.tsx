@@ -14,6 +14,10 @@ import {
   type Quant,
   type RankedFit,
   type RunMode,
+  YOLO_IMAGE_SIZE,
+  YOLO_INFER_BATCH,
+  YOLO_TRAIN_BATCH,
+  YOLO_TRAIN_EPOCHS,
 } from "@ondesk/core";
 import { jsonAuthHeaders } from "../lib/browser-key";
 import { HfLogo } from "../components/hf-logo";
@@ -460,6 +464,15 @@ export function Desk() {
           onChange={(e) => setNameFilter(e.target.value)}
         />
       </div>
+
+      {job === "detect" && (
+        <p className="hint">
+          YOLO basis: {YOLO_IMAGE_SIZE}×{YOLO_IMAGE_SIZE}
+          {mode === "infer"
+            ? ` · batch ${YOLO_INFER_BATCH}`
+            : ` · batch ${YOLO_TRAIN_BATCH} · ${YOLO_TRAIN_EPOCHS} epochs`}
+        </p>
+      )}
 
       <table className="results">
         <thead>

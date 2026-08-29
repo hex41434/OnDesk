@@ -13,6 +13,10 @@ import {
   type Quant,
   type RankedHardware,
   type RunMode,
+  YOLO_IMAGE_SIZE,
+  YOLO_INFER_BATCH,
+  YOLO_TRAIN_BATCH,
+  YOLO_TRAIN_EPOCHS,
 } from "@ondesk/core";
 import { jsonAuthHeaders } from "../lib/browser-key";
 import { JOB_LABEL } from "../lib/job-labels";
@@ -196,6 +200,9 @@ export function ModelTab() {
     mine ?? (need?.ok ? need.smallest?.hardware : undefined) ?? ranked[0]?.hardware;
   const math = picked && mathHw ? fit(picked, mathHw, { mode }) : null;
   const repoId = picked?.hf ?? picked?.id ?? null;
+  const isYolo =
+    picked?.id.toLowerCase().startsWith("yolo") ||
+    picked?.hf?.toLowerCase().includes("ultralytics/yolo") === true;
 
   useEffect(() => {
     setVisibleCount(PAGE_SIZE);
@@ -409,6 +416,14 @@ export function ModelTab() {
                 </span>
               ))}
             </div>
+          )}
+          {isYolo && (
+            <p className="hint">
+              YOLO basis: {YOLO_IMAGE_SIZE}×{YOLO_IMAGE_SIZE}
+              {mode === "infer"
+                ? ` · batch ${YOLO_INFER_BATCH}`
+                : ` · batch ${YOLO_TRAIN_BATCH} · ${YOLO_TRAIN_EPOCHS} epochs`}
+            </p>
           )}
           {need?.ok && (
           <>

@@ -2122,6 +2122,71 @@
     "weightGb": 0.115
   },
   {
+    "id": "yolo26n",
+    "name": "YOLO26n",
+    "paramsB": 0.0024,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "agpl-3.0",
+    "gguf": false,
+    "hf": "Ultralytics/YOLO26",
+    "weightGb": 0.00554
+  },
+  {
+    "id": "yolo26s",
+    "name": "YOLO26s",
+    "paramsB": 0.0095,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "agpl-3.0",
+    "gguf": false,
+    "hf": "Ultralytics/YOLO26",
+    "weightGb": 0.0204
+  },
+  {
+    "id": "yolo26m",
+    "name": "YOLO26m",
+    "paramsB": 0.0204,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "agpl-3.0",
+    "gguf": false,
+    "hf": "Ultralytics/YOLO26",
+    "weightGb": 0.0443
+  },
+  {
+    "id": "yolo26l",
+    "name": "YOLO26l",
+    "paramsB": 0.0248,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "agpl-3.0",
+    "gguf": false,
+    "hf": "Ultralytics/YOLO26",
+    "weightGb": 0.0532
+  },
+  {
+    "id": "yolo26x",
+    "name": "YOLO26x",
+    "paramsB": 0.0557,
+    "kind": "detector",
+    "jobs": [
+      "detect"
+    ],
+    "license": "agpl-3.0",
+    "gguf": false,
+    "hf": "Ultralytics/YOLO26",
+    "weightGb": 0.119
+  },
+  {
     "id": "rf-detr-nano",
     "name": "RF-DETR Nano",
     "paramsB": 0.03,
