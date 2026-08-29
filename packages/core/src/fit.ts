@@ -35,6 +35,8 @@ function extraGb(model: Model): number {
 
 function quantsFor(model: Model, mode: FitOptions["mode"]): Quant[] {
   if (mode === "train") return ["fp16"];
+  if (model.availableQuants?.length) return model.availableQuants;
+  if (model.sourceQuant === null) return ["fp16"];
   if (model.kind === "detector" || model.kind === "segment") {
     return ["fp16", "q8"];
   }
@@ -78,9 +80,20 @@ function scoreQuant(
     kv = 0;
     noteParts.push("no KV cache; activation memory is a coarse add-on");
   } else {
-    weights = weightsGb(model.paramsB, quant);
-    kv = kvCacheGb(model.arch, model.paramsB, context);
+    const useSourceWeights =
+      model.weightGb != null &&
+      (model.sourceQuant === null || model.sourceQuant === quant);
+    weights = useSourceWeights
+      ? model.weightGb!
+      : weightsGb(model.paramsB, quant);
+    const kvParams = model.activeParamsB ?? model.paramsB;
+    kv = kvCacheGb(model.arch, kvParams, context);
     noteParts.push(`KV cache at ${context} context (fp16, estimate)`);
+    if (model.activeParamsB && model.activeParamsB < model.paramsB) {
+      noteParts.push(
+        `MoE: ${model.paramsB.toFixed(0)}B total, ${model.activeParamsB.toFixed(0)}B active`,
+      );
+    }
   }
 
   const overhead = overheadGb(weights);
@@ -108,7 +121,8 @@ function scoreQuant(
     noteParts.push("does not fit at this quant");
   }
 
-  const quantLabel = mode === "train" ? null : quant;
+  const quantLabel =
+    mode === "train" || model.sourceQuant === null ? null : quant;
 
   return {
     band,
@@ -143,8 +157,7 @@ export function fit(
   const allowed = quantsFor(model, mode);
 
   if (options.quant) {
-    const q = allowed.includes(options.quant) ? options.quant : allowed[0]!;
-    return scoreQuant(model, hardware, q, options);
+    return scoreQuant(model, hardware, options.quant, options);
   }
 
   let fallback: FitResult | null = null;

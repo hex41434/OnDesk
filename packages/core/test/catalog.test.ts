@@ -1,7 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { gpus, matchHostSku, models, rank, rankHardware } from "../src/index";
+import { enoughFitInfo, gpus, matchHostSku, models, rank, rankHardware } from "../src/index";
 
 describe("catalog", () => {
+  it("catalog cards have enough info to score", () => {
+    expect(models.every((m) => enoughFitInfo(m))).toBe(true);
+  });
+
   it("has enough SKUs and models to demo", () => {
     expect(gpus.length).toBeGreaterThanOrEqual(40);
     expect(models.length).toBeGreaterThanOrEqual(100);

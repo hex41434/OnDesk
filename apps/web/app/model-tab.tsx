@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import {
+  enoughFitInfo,
   fit,
   gpus,
   models,
@@ -15,7 +16,7 @@ import {
 } from "@ondesk/core";
 import { jsonAuthHeaders } from "../lib/browser-key";
 import { JOB_LABEL } from "../lib/job-labels";
-import { modelMeta, quantLabel, sizeLabel } from "../lib/labels";
+import { quantLabel, sizeLabel } from "../lib/labels";
 import { HfLogo } from "../components/hf-logo";
 import { SortTh, type SortDir } from "../components/sort-th";
 import { SpeedBar } from "../components/speed-bar";
@@ -51,6 +52,59 @@ function nameHit(model: Model, query: string): boolean {
     model.name.toLowerCase().includes(q) ||
     model.id.toLowerCase().includes(q) ||
     (model.hf?.toLowerCase().includes(q) ?? false)
+  );
+}
+
+const PROBE: Hardware = {
+  id: "probe",
+  name: "probe",
+  maker: "nvidia",
+  memoryGb: 1_000_000,
+  memoryKind: "vram",
+  bandwidthGBs: 10_000,
+};
+
+function minNeed(model: Model, mode: RunMode, ranked: RankedHardware[]) {
+  if (!enoughFitInfo(model)) {
+    return { ok: false as const };
+  }
+  const low: Quant =
+    mode === "train"
+      ? "fp16"
+      : model.availableQuants?.at(-1) ??
+        (model.sourceQuant === null
+          ? "fp16"
+          : model.sourceQuant ?? (model.gguf ? "q2" : "fp16"));
+  const full = fit(model, PROBE, { mode, quant: low });
+  const ok = ranked.filter((r) => r.band !== "no");
+  const smallest = ok.length
+    ? ok.reduce((a, b) =>
+        a.hardware.memoryGb < b.hardware.memoryGb ? a : b,
+      )
+    : null;
+  return {
+    ok: true as const,
+    loadGb: Math.max(1, Math.ceil(full.gb)),
+    quant: full.quant,
+    smallest,
+  };
+}
+
+function hfUrl(id: string): string {
+  return `https://huggingface.co/${id}`;
+}
+
+function HfCardLink({ id }: { id: string }) {
+  return (
+    <a
+      href={hfUrl(id)}
+      target="_blank"
+      rel="noreferrer"
+      className="model-link min-req-hf"
+    >
+      <HfLogo size={14} className="hf-mark" />
+      link to model page
+    </a>
   );
 }
 
@@ -137,9 +191,8 @@ export function ModelTab() {
   const mathHw = mine ?? ranked[0]?.hardware;
   const math =
     picked && mathHw ? fit(picked, mathHw, { mode }) : null;
-  const pickedMeta = picked
-    ? modelMeta(picked.name, picked.paramsB, picked.license)
-    : "";
+  const need = picked ? minNeed(picked, mode, ranked) : null;
+  const repoId = picked?.hf ?? picked?.id ?? null;
 
   function onSort(key: HwSortKey) {
     if (sortKey === key) {
@@ -159,6 +212,13 @@ export function ModelTab() {
   }
 
   async function scoreRepo(id: string) {
+    const local = models.find(
+      (m) => m.hf?.toLowerCase() === id.toLowerCase(),
+    );
+    if (local) {
+      pickCatalog(local);
+      return;
+    }
     setHfLoading(true);
     setHfError(null);
     try {
@@ -304,18 +364,30 @@ export function ModelTab() {
 
       {picked && (
         <>
-          <p className="picked-model">
-            <a
-              href={`https://huggingface.co/${picked.hf ?? picked.id}`}
-              target="_blank"
-              rel="noreferrer"
-              className="model-link"
-            >
-              <HfLogo size={14} className="hf-mark" />
-              {picked.name}
-            </a>
-            {pickedMeta ? <span className="est"> · {pickedMeta}</span> : null}
-          </p>
+          {need && !need.ok && (
+            <p className="min-req">
+              <span className="min-req-k">Minimum</span>
+              <span className="min-req-v">no enough info</span>
+              {repoId && <HfCardLink id={repoId} />}
+            </p>
+          )}
+          {need && need.ok && (
+            <p className="min-req">
+              <span className="min-req-k">Minimum</span>
+              <span className="min-req-v">
+                ≥ {need.loadGb} GB
+              </span>
+              <span className="min-req-v">
+                {need.quant ? quantLabel(need.quant) : "quant not declared"}
+              </span>
+              <span className="min-req-v">
+                {need.smallest
+                  ? need.smallest.hardware.name
+                  : "no catalog card holds all experts"}
+              </span>
+              {repoId && <HfCardLink id={repoId} />}
+            </p>
+          )}
           {picked.jobs.length > 0 && (
             <div className="chips model-tags" aria-label="Model tags">
               {picked.jobs.map((j) => (
@@ -325,6 +397,8 @@ export function ModelTab() {
               ))}
             </div>
           )}
+          {need?.ok && (
+          <>
           <div className="table-bar">
             <div className="chips chips-mode">
               <button
@@ -461,6 +535,8 @@ export function ModelTab() {
           </table>
           {rows.length === 0 && (
             <p className="hint">Nothing in the catalog fits this model.</p>
+          )}
+          </>
           )}
         </>
       )}

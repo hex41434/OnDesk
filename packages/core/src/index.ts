@@ -7,7 +7,7 @@ export type { Intent } from "./intent";
 export { findHardware, hardwareById, matchHostSku } from "./hardware";
 export { companionFor, companionLine } from "./companion";
 export type { Companion } from "./companion";
-export { modelFromHub, parseHfRepo } from "./hub";
+export { enoughFitInfo, modelFromHub, parseHfRepo, sizeFromId } from "./hub";
 export { gpus, models } from "./catalog";
 export {
   BAND_GOOD,

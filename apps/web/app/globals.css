@@ -100,6 +100,39 @@ button.tab.on {
   margin: 0 0 0.55rem;
   font-size: 1.05rem;
 }
+.min-req {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 0.65rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--accent);
+  background: rgba(232, 163, 23, 0.14);
+}
+.min-req-k {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin-right: 0.15rem;
+}
+.min-req-v {
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  padding: 0.12rem 0.5rem;
+  border: 1px solid var(--accent);
+  color: var(--ink);
+  background: var(--bg);
+}
+.min-req-note {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.min-req-hf {
+  margin-left: auto;
+  font-size: 0.9rem;
+}
 .hf-badge a { color: var(--ink); }
 
 label.field-hf {

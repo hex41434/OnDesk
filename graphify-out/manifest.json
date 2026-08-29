@@ -5,8 +5,8 @@
     "semantic_hash": ""
   },
   "apps/web/app/api/hf/route.ts": {
-    "mtime": 1787680971.1039577,
-    "ast_hash": "e12f796b1fb3a5ac9b984cc4f59261b1",
+    "mtime": 1788016834.964582,
+    "ast_hash": "ff1d88409169d7c8112017a5fc90dc17",
     "semantic_hash": ""
   },
   "apps/web/app/desk.tsx": {
@@ -85,8 +85,8 @@
     "semantic_hash": ""
   },
   "packages/core/src/fit.ts": {
-    "mtime": 1787681119.7473338,
-    "ast_hash": "8e5c27697fc4a2e686fbe031955d4d70",
+    "mtime": 1788016952.891318,
+    "ast_hash": "6c21303261451a6e48a338338fae3bde",
     "semantic_hash": ""
   },
   "packages/core/src/hardware.ts": {
@@ -95,13 +95,13 @@
     "semantic_hash": ""
   },
   "packages/core/src/hub.ts": {
-    "mtime": 1787955676.8299103,
-    "ast_hash": "6766e370637a9d3410125b1e6ff442e0",
+    "mtime": 1788016946.0409272,
+    "ast_hash": "045192cc7d49ea8cefb405249daf8594",
     "semantic_hash": ""
   },
   "packages/core/src/index.ts": {
-    "mtime": 1787958076.0896678,
-    "ast_hash": "dcb793487eb71dd27e1d9b92d93ba139",
+    "mtime": 1788003396.6802664,
+    "ast_hash": "7ab44429c7150972eed12cf3e7f90d7f",
     "semantic_hash": ""
   },
   "packages/core/src/intent.ts": {
@@ -120,18 +120,18 @@
     "semantic_hash": ""
   },
   "packages/core/src/types.ts": {
-    "mtime": 1787957575.6480618,
-    "ast_hash": "fb8eb08b756a037d5fee3ffff0a6b424",
+    "mtime": 1788016930.7800176,
+    "ast_hash": "5bedbe3a1339e183fa419111a35847ab",
     "semantic_hash": ""
   },
   "packages/core/test/catalog.test.ts": {
-    "mtime": 1787958077.0093186,
-    "ast_hash": "a7557533b4b9e917574381939c6c409e",
+    "mtime": 1788003420.3469777,
+    "ast_hash": "5d4b5066109c186309f715aa54033dc2",
     "semantic_hash": ""
   },
   "packages/core/test/fit.test.ts": {
-    "mtime": 1787957586.3951297,
-    "ast_hash": "9163095edc0bab8ea3b0b184e887e90f",
+    "mtime": 1788016978.9975061,
+    "ast_hash": "76d258de530c58fddbc46fcf7124a848",
     "semantic_hash": ""
   },
   "packages/core/tsconfig.json": {
@@ -210,8 +210,8 @@
     "semantic_hash": ""
   },
   "apps/web/app/model-tab.tsx": {
-    "mtime": 1787958682.1848266,
-    "ast_hash": "860dcf02ff3c46f2efe5ca150a1f62ca",
+    "mtime": 1788016961.647736,
+    "ast_hash": "38c87182410602df16fa9adf4bca6c82",
     "semantic_hash": ""
   },
   "apps/web/components/sort-th.tsx": {

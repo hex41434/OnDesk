@@ -34,10 +34,19 @@ export type Model = {
   id: string;
   name: string;
   paramsB: number;
+  /** MoE active params when smaller than paramsB (A95B). KV uses this. */
+  activeParamsB?: number;
   kind: ModelKind;
   jobs: Job[];
   license: string;
   gguf: boolean;
+  /** Quantizations explicitly present in the selected Hub repo. */
+  availableQuants?: Quant[];
+  /**
+   * Quantization used by weightGb. Null means the repo is compressed but does
+   * not declare a precise quantization.
+   */
+  sourceQuant?: Quant | null;
   /** Hugging Face repo, org/name */
   hf?: string;
   arch?: Architecture;
@@ -103,6 +112,11 @@ export type HubConfig = {
   head_dim?: number;
   torch_dtype?: string;
   vocab_size?: number;
+  quantization_config?: {
+    bits?: number;
+    quant_method?: string;
+  };
+  text_config?: HubConfig;
 };
 
 export type HubCard = {

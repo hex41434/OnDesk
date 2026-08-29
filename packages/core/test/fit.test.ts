@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { fit } from "../src/fit";
 import { findHardware } from "../src/hardware";
-import { modelFromHub, parseHfRepo } from "../src/hub";
+import { enoughFitInfo, modelFromHub, parseHfRepo, sizeFromId } from "../src/hub";
 import { matchIntent } from "../src/intent";
 import {
   availableGb,
@@ -143,6 +143,28 @@ describe("fit()", () => {
     expect(result.tokensPerSec).toBeGreaterThan(0);
   });
 
+  it("honors a requested quant even when the repo has no GGUF", () => {
+    const dense: Model = { ...llama7, gguf: false, paramsB: 2446, arch: undefined };
+    const q4 = fit(dense, { ...gpu8, memoryGb: 10_000 }, { quant: "q4" });
+    expect(q4.quant).toBe("q4");
+    expect(q4.breakdown.weightsGb).toBeCloseTo(weightsGb(2446, "q4"), 0);
+  });
+
+  it("MoE KV uses active params, not the full 2.4T", () => {
+    const moe: Model = {
+      ...llama7,
+      id: "qwen-2.4t",
+      name: "Qwen 2.4T A95B",
+      paramsB: 2446,
+      activeParamsB: 95,
+      arch: undefined,
+    };
+    const huge = fit(moe, { ...gpu8, memoryGb: 10_000 }, { quant: "q4" });
+    const dense = fit({ ...moe, activeParamsB: undefined }, { ...gpu8, memoryGb: 10_000 }, { quant: "q4" });
+    expect(huge.breakdown.kvCacheGb).toBeLessThan(dense.breakdown.kvCacheGb);
+    expect(huge.breakdown.kvCacheGb).toBeCloseTo(0.125 * 95, 0);
+  });
+
   it("Qwen2.5-VL-7B fits an M4 16GB at some quant", () => {
     const result = fit(vl7, m4);
     expect(result.band).not.toBe("no");
@@ -257,6 +279,107 @@ describe("parseHfRepo / modelFromHub", () => {
     expect(model.jobs).toContain("vision");
     expect(model.paramsB).toBeCloseTo(8.3, 1);
     expect(model.arch?.nLayers).toBe(28);
+    expect(enoughFitInfo(model)).toBe(true);
+  });
+
+  it("scores a dense Hub card even when total is a param count, not bytes", () => {
+    const model = modelFromHub({
+      id: "Qwen/Qwen2.5-7B-Instruct",
+      pipeline_tag: "text-generation",
+      tags: ["qwen"],
+      safetensors: {
+        total: 7615616512,
+        parameters: { BF16: 7615616512 },
+      },
+      siblings: [
+        { rfilename: "model-00001-of-00002.safetensors", size: 7.7e9 },
+        { rfilename: "model-00002-of-00002.safetensors", size: 7.6e9 },
+      ],
+      cardData: { license: "apache-2.0" },
+    });
+    expect(model.paramsB).toBeCloseTo(7.62, 1);
+    expect(model.weightGb).toBeCloseTo(15.3, 1);
+    expect(model.gguf).toBe(false);
+    expect(model.availableQuants).toEqual(["fp16"]);
+    expect(enoughFitInfo(model)).toBe(true);
+  });
+
+  it("scores a GGUF repo from its real file plus declared name size", () => {
+    const model = modelFromHub({
+      id: "projectj/Instinct-Python-Coder-Gemma4-12B-KimiK3",
+      pipeline_tag: "text-generation",
+      tags: ["gguf"],
+      siblings: [
+        {
+          rfilename: "Instinct-Python-Coder-Gemma4-12B-KimiK3-Q8_0.gguf",
+          size: 12.67e9,
+        },
+      ],
+      cardData: { license: "apache-2.0" },
+    });
+    expect(model.paramsB).toBe(12);
+    expect(model.gguf).toBe(true);
+    expect(model.availableQuants).toEqual(["q8"]);
+    expect(enoughFitInfo(model)).toBe(true);
+    const rows = rankHardware(model, [
+      gpu8,
+      { ...gpu8, id: "rtx-4090", name: "RTX 4090 24GB", memoryGb: 24 },
+    ]);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]?.hardware.id).toBe("rtx-4090");
+    expect(rows[0]?.quant).toBe("q8");
+  });
+
+  it("uses the declared AWQ quant and real weight size", () => {
+    const model = modelFromHub({
+      id: "Qwen/Qwen2.5-7B-Instruct-AWQ",
+      pipeline_tag: "text-generation",
+      tags: ["4-bit", "awq"],
+      safetensors: {
+        total: 7615616512,
+        parameters: { BF16: 7615616512 },
+      },
+      siblings: [
+        { rfilename: "model-00001-of-00002.safetensors", size: 2.8e9 },
+        { rfilename: "model-00002-of-00002.safetensors", size: 2.77e9 },
+      ],
+    });
+    const result = fit(model, gpu8);
+    expect(model.availableQuants).toEqual(["q4"]);
+    expect(result.quant).toBe("q4");
+    expect(result.breakdown.weightsGb).toBeCloseTo(5.57, 1);
+  });
+
+  it("does not invent a size from the repo name alone", () => {
+    const model = modelFromHub({
+      id: "Someone/Mystery-7B",
+      pipeline_tag: "text-generation",
+      tags: [],
+    });
+    expect(model.paramsB).toBe(0);
+    expect(enoughFitInfo(model)).toBe(false);
+  });
+
+  it("reads MoE size from the repo id and does not treat Hub total as bytes", () => {
+    expect(sizeFromId("Qwen/Qwen3.8-2.4T-A95B")).toEqual({
+      totalB: 2400,
+      activeB: 95,
+    });
+    const model = modelFromHub({
+      id: "Qwen/Qwen3.8-2.4T-A95B",
+      pipeline_tag: "text-generation",
+      tags: ["qwen3_5_moe_text"],
+      safetensors: {
+        total: 2446182725504,
+        parameters: { BF16: 2446182725504 },
+      },
+      cardData: { license: "other" },
+    });
+    expect(model.paramsB).toBeCloseTo(2446, 0);
+    expect(model.activeParamsB).toBe(95);
+    expect(model.gguf).toBe(false);
+    expect(model.weightGb).toBeUndefined();
+    expect(enoughFitInfo(model)).toBe(false);
   });
 
   it("maps function-calling tags to tools", () => {
