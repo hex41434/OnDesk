@@ -1,45 +1,116 @@
 # OnDesk
 
-**What fits on the desk. Not in the cloud.**
+> What fits on the desk. Not in the cloud.
 
-Pick a GPU (or paste a Hugging Face repo). See what actually runs locally. Get a digest when something new fits *that* hardware.
+OnDesk helps you choose local AI hardware with fewer guesses. Pick a GPU or
+Apple Silicon configuration to see which models fit, or paste a Hugging Face
+repository to find the hardware that can run it.
 
-This is not [llmfit](https://github.com/AlexsJones/llmfit). llmfit scores the machine you already have, from a catalog baked into a TUI. OnDesk answers the moment *before* checkout, and again next week. Cite llmfit as prior art. The scoring engine here is small and ours.
+Every result shows the memory estimate, best available quantization, fit band,
+and estimated generation speed. The calculations are deterministic and visible
+instead of being delegated to an AI model.
 
-Live demo: run `npm run dev` until a public URL exists.
+## What OnDesk does
+
+- **Hardware to models:** choose a device and get a ranked list of compatible
+  language, vision, detection, segmentation, speech, and embedding models.
+- **Model to hardware:** paste an `org/model` identifier or Hugging Face URL and
+  see the smallest compatible hardware in the catalog.
+- **Inference and training modes:** compare normal inference with a conservative
+  full-training memory estimate.
+- **Transparent memory math:** inspect weights, KV cache, runtime overhead, extra
+  modality memory, and usable device memory.
+- **Practical filters:** narrow results by task, model name, hardware name,
+  memory use, fit quality, quantization, or estimated speed.
+- **Optional smart search:** use Gemini to translate informal or multilingual
+  queries into hardware and Hugging Face search terms. Gemini never decides the
+  fit score.
 
 ## Quick start
 
+Requirements: Node.js 20 or newer.
+
 ```bash
+git clone https://github.com/hex41434/ondesk.git
+cd ondesk
 npm install
-npm test          # scoring engine
-npm run dev       # http://localhost:3000
+npm test
+npm run dev
 ```
 
-Requires Node 20+. Optional smart search: put `GEMINI_API_KEY` in `apps/web/.env.local`, or paste it under **Settings** (not on the Fit page). Numbers still come from `fit()`, never from Gemini.
+Open [http://localhost:3000](http://localhost:3000).
 
-## What you get
+Other useful commands:
 
-- **Hardware → table.** Autocomplete a SKU. Optional job chip (`vision`, `detect`, `coding`, …). Ranked rows: name, size, best quant, fit band, estimated tok/s, Hub link.
-- **This model.** Paste `org/name` or a Hub URL. One card with the GB math visible.
-- **Formulas.** `/about` is the scoring write-up.
-- **Digest stub.** `/digest` — weekly “new models that fit an RTX 4060”.
-
-Numbers are **deterministic**. Same SKU + same catalog = same table. Estimated tok/s is labeled **est.** It is not a bench.
-
-## Repo
-
-```
-data/gpus.json       curated SKUs (VRAM / unified / bandwidth)
-data/models.json     starter catalog (~140 cards, not all of HF)
-packages/core        fit() + rank() + tests
-apps/web             Next.js page
-PLAN.md              why this shape
-story.md             how the idea got here
+```bash
+npm run typecheck
+npm run build
 ```
 
-`fit(model, hardware) → { band, gb, quant, note, tokensPerSec, breakdown }`.
+## Optional Gemini search
+
+OnDesk works without Gemini. To enable natural-language search, either save a
+Gemini API key on the **Settings** page or create `apps/web/.env.local`:
+
+```bash
+GEMINI_API_KEY=your_key_here
+```
+
+A key entered through Settings is stored in that browser's local storage and is
+sent to the OnDesk API only when smart search is used. Fit calculations remain
+inside `@ondesk/core` and do not use Gemini.
+
+## How scoring works
+
+At a high level, OnDesk estimates:
+
+```text
+working set = model weights + KV cache + runtime overhead + modality extras
+```
+
+The scorer then compares the working set with usable VRAM or unified memory,
+selects the highest-quality supported quantization that fits, and assigns one
+of four bands:
+
+- `perfect` — uses at most 50% of available memory
+- `good` — uses at most 75%
+- `tight` — uses at most 90%
+- `no` — does not fit under the current assumptions
+
+Estimated tokens per second use memory bandwidth and a hardware-specific
+efficiency factor. They are always labeled `est.` because they are projections,
+not benchmark results. The full formulas and assumptions are available at
+[`/about`](http://localhost:3000/about) while the app is running.
+
+## Project structure
+
+```text
+apps/web/              Next.js application and API routes
+packages/core/         deterministic fit and ranking engine
+packages/core/test/    scoring and catalog tests
+data/gpus.json         curated hardware profiles
+data/models.json       curated model catalog
+data/digest.json       digest source data
+```
+
+The main API is intentionally small:
+
+```ts
+fit(model, hardware, options)
+// => { band, gb, quant, note, tokensPerSec, breakdown }
+```
+
+## Current limitations
+
+- Hardware and catalog specifications are curated and may lag new releases.
+- Speed values are estimates, not measurements from the selected device.
+- Training mode models full training at roughly 6× FP16 weights; LoRA and QLoRA
+  are not modeled yet.
+- Remote Hugging Face repositories may not expose enough metadata for a reliable
+  estimate.
+- Host hardware detection is intended for local development and is not used to
+  identify visitors' devices on a public deployment.
 
 ## License
 
-MIT.
+[MIT](LICENSE)
