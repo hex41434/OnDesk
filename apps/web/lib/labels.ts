@@ -1,6 +1,10 @@
 import type { Quant } from "@ondesk/core";
 
 export function sizeLabel(paramsB: number): string {
+  if (paramsB >= 1000) {
+    const trillions = paramsB / 1000;
+    return `${trillions.toFixed(trillions >= 10 ? 0 : 2).replace(/\.0+$/, "")}T`;
+  }
   if (paramsB >= 100) return `${paramsB.toFixed(0)}B`;
   if (paramsB >= 1) return `${paramsB.toFixed(paramsB >= 10 ? 0 : 1)}B`;
   if (paramsB >= 0.001) return `${Math.round(paramsB * 1000)}M`;

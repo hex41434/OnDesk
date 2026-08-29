@@ -114,7 +114,16 @@ export type HubConfig = {
   vocab_size?: number;
   quantization_config?: {
     bits?: number;
+    num_bits?: number;
     quant_method?: string;
+    config_groups?: Record<
+      string,
+      {
+        weights?: {
+          num_bits?: number;
+        };
+      }
+    >;
   };
   text_config?: HubConfig;
 };

@@ -389,18 +389,26 @@ export function ModelTab() {
           )}
           {need && need.ok && (
             <p className="min-req">
-              <span className="min-req-k">Minimum</span>
+              <span className="min-req-k">Estimate</span>
               <span className="min-req-v">
-                ≥ {need.loadGb} GB
+                {sizeLabel(picked.paramsB)} total parameters
               </span>
               <span className="min-req-v">
-                {need.quant ? quantLabel(need.quant) : "quant not declared"}
+                ≈ {need.loadGb} GB working set
+              </span>
+              <span className="min-req-v">
+                {need.quant ? quantLabel(need.quant) : "quantization unknown"}
               </span>
               <span className="min-req-v">
                 {need.smallest
                   ? need.smallest.hardware.name
-                  : "no catalog card holds all experts"}
+                  : "multi-GPU or offload required"}
               </span>
+              {!need.smallest && (
+                <span className="min-req-note">
+                  The full checkpoint must be loaded, including inactive MoE experts.
+                </span>
+              )}
               {repoId && <HfCardLink id={repoId} />}
             </p>
           )}

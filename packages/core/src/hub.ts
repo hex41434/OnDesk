@@ -147,6 +147,20 @@ function quantFromBits(bits: number | undefined): Quant | undefined {
   return undefined;
 }
 
+function configuredQuant(config: HubConfig | undefined): Quant | undefined {
+  for (let current = config; current; current = current.text_config) {
+    const quant = current.quantization_config;
+    if (!quant) continue;
+    const direct = quantFromBits(quant.bits ?? quant.num_bits);
+    if (direct) return direct;
+    for (const group of Object.values(quant.config_groups ?? {})) {
+      const nested = quantFromBits(group.weights?.num_bits);
+      if (nested) return nested;
+    }
+  }
+  return undefined;
+}
+
 function quantsFromCard(
   card: HubCard,
   config: HubConfig | undefined,
@@ -166,7 +180,7 @@ function quantsFromCard(
     if (quant) found.add(quant);
   }
 
-  const configured = quantFromBits(config?.quantization_config?.bits);
+  const configured = configuredQuant(config);
   if (configured) found.add(configured);
 
   const tags = [...(card.tags ?? []), ...(card.cardData?.tags ?? [])]

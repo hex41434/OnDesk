@@ -350,6 +350,36 @@ describe("parseHfRepo / modelFromHub", () => {
     expect(result.breakdown.weightsGb).toBeCloseTo(5.57, 1);
   });
 
+  it("reads nested compressed-tensors INT4 metadata", () => {
+    const model = modelFromHub({
+      id: "moonshotai/Kimi-K2.6",
+      pipeline_tag: "image-text-to-text",
+      tags: ["compressed-tensors"],
+      safetensors: {
+        total: 1_026_879_376_368,
+        parameters: { I32: 1_014_686_023_680, BF16: 12_193_329_648 },
+      },
+      siblings: [
+        { rfilename: "model-00001-of-00064.safetensors", size: 595.18e9 },
+      ],
+      config: {
+        text_config: {
+          quantization_config: {
+            quant_method: "compressed-tensors",
+            config_groups: {
+              group_0: { weights: { num_bits: 4 } },
+            },
+          },
+        },
+      },
+    });
+
+    expect(model.paramsB).toBeCloseTo(1_026.88, 1);
+    expect(model.availableQuants).toEqual(["q4"]);
+    expect(model.sourceQuant).toBe("q4");
+    expect(fit(model, { ...gpu8, memoryGb: 1_000 }).quant).toBe("q4");
+  });
+
   it("does not invent a size from the repo name alone", () => {
     const model = modelFromHub({
       id: "Someone/Mystery-7B",
