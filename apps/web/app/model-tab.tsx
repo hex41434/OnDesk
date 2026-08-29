@@ -39,6 +39,7 @@ const QUANT_SORT: Record<Quant, number> = {
   q3: 5,
   q2: 6,
 };
+const PAGE_SIZE = 32;
 
 function cmpText(a: string, b: string): number {
   if (a < b) return -1;
@@ -157,8 +158,11 @@ export function ModelTab() {
   const [sortDir, setSortDir] = useState<SortDir>("desc");
   const [mine, setMine] = useState<Hardware | null>(null);
   const [hwFilter, setHwFilter] = useState("");
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   useEffect(() => {
+    const hostname = window.location.hostname;
+    if (!["localhost", "127.0.0.1", "::1"].includes(hostname)) return;
     let gone = false;
     void fetch("/api/host-hardware")
       .then((res) => res.json() as Promise<{ hardware?: Hardware | null }>)
@@ -188,11 +192,16 @@ export function ModelTab() {
   const sorted = sortKey ? sortHw(ranked, sortKey, sortDir) : ranked;
   const qHw = hwFilter.trim();
   const rows = qHw ? sorted.filter((r) => hwHit(r.hardware, qHw)) : sorted;
-  const mathHw = mine ?? ranked[0]?.hardware;
-  const math =
-    picked && mathHw ? fit(picked, mathHw, { mode }) : null;
+  const visibleRows = rows.slice(0, visibleCount);
   const need = picked ? minNeed(picked, mode, ranked) : null;
+  const mathHw =
+    mine ?? (need?.ok ? need.smallest?.hardware : undefined) ?? ranked[0]?.hardware;
+  const math = picked && mathHw ? fit(picked, mathHw, { mode }) : null;
   const repoId = picked?.hf ?? picked?.id ?? null;
+
+  useEffect(() => {
+    setVisibleCount(PAGE_SIZE);
+  }, [picked, mode, sortKey, sortDir, hwFilter]);
 
   function onSort(key: HwSortKey) {
     if (sortKey === key) {
@@ -212,6 +221,7 @@ export function ModelTab() {
   }
 
   async function scoreRepo(id: string) {
+    if (hfLoading) return;
     const local = models.find(
       (m) => m.hf?.toLowerCase() === id.toLowerCase(),
     );
@@ -242,6 +252,7 @@ export function ModelTab() {
   }
 
   async function onModelQuery() {
+    if (hfLoading) return;
     const asId = parseHfRepo(hfInput);
     if (asId) {
       await scoreRepo(asId);
@@ -307,6 +318,7 @@ export function ModelTab() {
           <button
             type="button"
             className="chip"
+            disabled={hfLoading}
             onClick={() => void onModelQuery()}
           >
             {hfLoading ? "Searching…" : "Search Hub"}
@@ -337,7 +349,11 @@ export function ModelTab() {
             ))}
             {hits.map((hit) => (
               <li key={hit.id}>
-                <button type="button" onClick={() => void scoreRepo(hit.id)}>
+                <button
+                  type="button"
+                  disabled={hfLoading}
+                  onClick={() => void scoreRepo(hit.id)}
+                >
                   <span className="hw-name model-link-inline">
                     <HfLogo size={14} />
                     {hit.id}
@@ -497,7 +513,7 @@ export function ModelTab() {
               </tr>
             </thead>
             <tbody>
-              {rows.map((row) => {
+              {visibleRows.map((row) => {
                 const toks = row.tokensPerSec;
                 const isMine = mine?.id === row.hardware.id;
                 return (
@@ -533,6 +549,18 @@ export function ModelTab() {
               })}
             </tbody>
           </table>
+          {visibleCount < rows.length && (
+            <p className="hint">
+              Showing {visibleRows.length} of {rows.length}.{" "}
+              <button
+                type="button"
+                className="chip"
+                onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
+              >
+                Show {Math.min(PAGE_SIZE, rows.length - visibleCount)} more
+              </button>
+            </p>
+          )}
           {rows.length === 0 && (
             <p className="hint">Nothing in the catalog fits this model.</p>
           )}

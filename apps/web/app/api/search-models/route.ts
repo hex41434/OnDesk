@@ -43,8 +43,19 @@ async function hubSearch(search: string): Promise<HubHit[]> {
 }
 
 export async function POST(req: Request) {
-  const body = (await req.json()) as { query?: string };
-  const query = body.query?.trim() ?? "";
+  let body: unknown;
+  try {
+    body = await req.json();
+  } catch {
+    return Response.json({ error: "Invalid JSON body." }, { status: 400 });
+  }
+  const query =
+    typeof body === "object" &&
+    body !== null &&
+    "query" in body &&
+    typeof body.query === "string"
+      ? body.query.trim()
+      : "";
   if (query.length < 2) {
     return Response.json({ error: "Type a model name or job." }, { status: 400 });
   }

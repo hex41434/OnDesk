@@ -53,6 +53,7 @@ const QUANT_SORT: Record<Quant, number> = {
   q3: 5,
   q2: 6,
 };
+const PAGE_SIZE = 32;
 
 function cmpText(a: string, b: string): number {
   if (a < b) return -1;
@@ -108,6 +109,7 @@ export function Desk() {
   const [sortKey, setSortKey] = useState<SortKey | null>(null);
   const [sortDir, setSortDir] = useState<SortDir>("desc");
   const [nameFilter, setNameFilter] = useState("");
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [smartHw, setSmartHw] = useState<Hardware[] | null>(null);
   const [hwVia, setHwVia] = useState<"gemini" | "local" | null>(null);
   const hwBox = useRef<HTMLDivElement>(null);
@@ -126,6 +128,11 @@ export function Desk() {
     const ordered = sortKey ? sortRows(catalog, sortKey, sortDir) : catalog;
     const q = nameFilter.trim();
     return q ? ordered.filter((r) => nameHit(r.model, q)) : ordered;
+  }, [picked, job, mode, sortKey, sortDir, nameFilter]);
+  const visibleRows = rows.slice(0, visibleCount);
+
+  useEffect(() => {
+    setVisibleCount(PAGE_SIZE);
   }, [picked, job, mode, sortKey, sortDir, nameFilter]);
 
   function onSort(key: SortKey) {
@@ -186,6 +193,8 @@ export function Desk() {
 
   useEffect(() => {
     if (!openSuggest) return;
+    const controller = new AbortController();
+    let cancelled = false;
     const q = hwQuery.trim();
     if (q.length < 2 || q === picked.name) {
       setSmartHw(null);
@@ -198,12 +207,13 @@ export function Desk() {
           method: "POST",
           headers: jsonAuthHeaders(),
           body: JSON.stringify({ query: q }),
+          signal: controller.signal,
         });
         const body = (await res.json()) as {
           hits?: Hardware[];
           via?: "gemini" | "local";
         };
-        if (!res.ok || !body.hits?.length) return;
+        if (cancelled || !res.ok || !body.hits?.length) return;
         setSmartHw(body.hits);
         setHwVia(body.via ?? "local");
         setActiveIndex(0);
@@ -211,7 +221,11 @@ export function Desk() {
         // keep substring list
       }
     }, 450);
-    return () => window.clearTimeout(t);
+    return () => {
+      cancelled = true;
+      controller.abort();
+      window.clearTimeout(t);
+    };
   }, [hwQuery, openSuggest, picked.name]);
 
   return (
@@ -504,7 +518,7 @@ export function Desk() {
           </tr>
         </thead>
         <tbody>
-          {rows.map((row) => {
+          {visibleRows.map((row) => {
             const id = row.model.hf ?? row.model.id;
             const toks = row.tokensPerSec;
             return (
@@ -537,6 +551,18 @@ export function Desk() {
           })}
         </tbody>
       </table>
+      {visibleCount < rows.length && (
+        <p className="hint">
+          Showing {visibleRows.length} of {rows.length}.{" "}
+          <button
+            type="button"
+            className="chip"
+            onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
+          >
+            Show {Math.min(PAGE_SIZE, rows.length - visibleCount)} more
+          </button>
+        </p>
+      )}
       {rows.length === 0 && (
         <p className="hint">Nothing in the catalog fits this filter.</p>
       )}

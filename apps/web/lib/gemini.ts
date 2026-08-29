@@ -35,24 +35,29 @@ export async function geminiJson(
   prompt: string,
 ): Promise<Record<string, unknown> | null> {
   for (const model of GEMINI_MODELS) {
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-goog-api-key": key,
-        },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-            temperature: 0,
-            responseMimeType: "application/json",
+    let res: Response;
+    try {
+      res = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-goog-api-key": key,
           },
-        }),
-        cache: "no-store",
-      },
-    );
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: {
+              temperature: 0,
+              responseMimeType: "application/json",
+            },
+          }),
+          cache: "no-store",
+        },
+      );
+    } catch {
+      continue;
+    }
     if (!res.ok) continue;
     const body = (await res.json()) as {
       candidates?: { content?: { parts?: { text?: string }[] } }[];
