@@ -135,12 +135,6 @@ button.tab.on {
 }
 .hf-badge a { color: var(--ink); }
 
-label.field-hf {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
 .model-link {
   display: inline-flex;
   align-items: center;
@@ -149,14 +143,6 @@ label.field-hf {
   text-decoration: none;
 }
 .model-link:hover { color: var(--accent); text-decoration: underline; }
-.hf-mark { flex-shrink: 0; }
-
-.model-link-inline {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
 .panel {
   background: var(--bg-2);
   border: 1px solid var(--line);

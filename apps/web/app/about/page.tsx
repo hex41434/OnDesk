@@ -16,6 +16,11 @@ export default function AboutPage() {
         <code>2 × layers × KV heads × head dim × context × 2 bytes</code>.
         Vision towers get a coarse extra. Detectors skip KV.
       </p>
+      <p>
+        For detectors, segmentation, speech, and embedding models, activation
+        memory is deliberately a rough allowance. Input resolution, batch size,
+        framework workspace, and runtime-specific optimizations are not modeled.
+      </p>
 
       <h2>Available RAM</h2>
       <p>
@@ -23,6 +28,11 @@ export default function AboutPage() {
         memory (the rest is the OS). CPU-only: 75% of system RAM. Training is
         modeled as about 6× FP16 weights (Adam + activations). LoRA is not
         modeled yet.
+      </p>
+      <p>
+        Training results are capacity estimates, not configuration advice. This
+        matters especially for vision training, where image size, batch size,
+        optimizer, and augmentation can dominate memory use.
       </p>
 
       <h2>Fit bands</h2>

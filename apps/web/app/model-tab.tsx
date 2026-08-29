@@ -17,7 +17,6 @@ import {
 import { jsonAuthHeaders } from "../lib/browser-key";
 import { JOB_LABEL } from "../lib/job-labels";
 import { quantLabel, sizeLabel } from "../lib/labels";
-import { HfLogo } from "../components/hf-logo";
 import { SortTh, type SortDir } from "../components/sort-th";
 import { SpeedBar } from "../components/speed-bar";
 
@@ -103,7 +102,6 @@ function HfCardLink({ id }: { id: string }) {
       rel="noreferrer"
       className="model-link min-req-hf"
     >
-      <HfLogo size={14} className="hf-mark" />
       link to model page
     </a>
   );
@@ -300,10 +298,7 @@ export function ModelTab() {
   return (
     <>
       <div className="panel">
-        <label className="field field-hf" htmlFor="hf">
-          <HfLogo size={15} />
-          Search a model
-        </label>
+        <label className="field" htmlFor="hf">Search a model</label>
         <input
           id="hf"
           type="text"
@@ -337,10 +332,7 @@ export function ModelTab() {
             {catalogHits.map((m) => (
               <li key={`cat-${m.id}`}>
                 <button type="button" onClick={() => pickCatalog(m)}>
-                  <span className="hw-name model-link-inline">
-                    <HfLogo size={14} />
-                    {m.hf ?? m.id}
-                  </span>
+                  <span className="hw-name">{m.hf ?? m.id}</span>
                   <span className="hw-spec">
                     catalog · {sizeLabel(m.paramsB)}
                   </span>
@@ -354,10 +346,7 @@ export function ModelTab() {
                   disabled={hfLoading}
                   onClick={() => void scoreRepo(hit.id)}
                 >
-                  <span className="hw-name model-link-inline">
-                    <HfLogo size={14} />
-                    {hit.id}
-                  </span>
+                  <span className="hw-name">{hit.id}</span>
                   <span className="hw-spec">
                     {hit.pipeline_tag ?? "model"}
                     {hit.downloads != null

@@ -530,7 +530,6 @@ export function Desk() {
                     rel="noreferrer"
                     className="model-link"
                   >
-                    <HfLogo size={14} className="hf-mark" />
                     {row.model.name}
                   </a>
                 </td>
