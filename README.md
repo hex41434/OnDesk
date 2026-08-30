@@ -2,6 +2,8 @@
 
 > What fits on the desk. Not in the cloud.
 
+![OnDesk matching local AI models to desktop hardware](docs/ondesk-hero.png)
+
 OnDesk helps you choose local AI hardware with fewer guesses. Pick a GPU or
 Apple Silicon configuration to see which models fit, or paste a Hugging Face
 repository to find the hardware that can run it.
