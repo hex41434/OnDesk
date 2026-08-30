@@ -10,4 +10,6 @@ coverage/
 !.env.example
 !.env*.example
 apps/web/.next/
+apps/web/.open-next/
+apps/web/.wrangler/
 graphify-out/.graphify_chunk_*.json

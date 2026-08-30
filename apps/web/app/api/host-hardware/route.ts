@@ -32,7 +32,16 @@ async function probe(): Promise<{ hint: string; memoryGb: number }> {
   return { hint: brand || os.cpus()[0]?.model || os.arch(), memoryGb };
 }
 
-export async function GET() {
+export async function GET(req: Request) {
+  const hostname = new URL(req.url).hostname;
+  if (!["localhost", "127.0.0.1", "::1"].includes(hostname)) {
+    return Response.json({
+      hardware: null,
+      hint: "Host detection is available only during local development.",
+      memoryGb: 0,
+    });
+  }
+
   const raw = await probe();
   const hardware: Hardware | undefined = matchHostSku(
     raw.hint,

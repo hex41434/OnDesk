@@ -5,6 +5,10 @@
   "scripts": {
     "dev": "next dev --port 3000",
     "build": "next build",
+    "build:cf": "opennextjs-cloudflare build",
+    "preview:cf": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "start": "next start",
     "typecheck": "tsc --noEmit"
   },
@@ -15,9 +19,11 @@
     "react-dom": "^19.1.1"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.20.4",
     "@types/node": "^22.18.0",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "wrangler": "^4.127.1"
   }
 }

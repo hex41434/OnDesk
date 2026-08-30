@@ -4,6 +4,8 @@
 
 ![OnDesk matching local AI models to desktop hardware](docs/ondesk-hero.png)
 
+**Live demo:** [ondesk.webmap-directory.workers.dev](https://ondesk.webmap-directory.workers.dev)
+
 OnDesk helps you choose local AI hardware with fewer guesses. Pick a GPU or
 Apple Silicon configuration to see which models fit, or paste a Hugging Face
 repository to find the hardware that can run it.
@@ -48,6 +50,19 @@ Other useful commands:
 npm run typecheck
 npm run build
 ```
+
+## Deploy to Cloudflare Workers
+
+The full-stack app deploys through OpenNext. A custom domain is optional;
+Cloudflare provides a `*.workers.dev` URL automatically.
+
+```bash
+npm run build:cf
+npm run deploy
+```
+
+Host hardware detection remains local-only. Public visitors choose their
+hardware from the catalog instead of reading the Cloudflare server runtime.
 
 ## Optional Gemini search
 

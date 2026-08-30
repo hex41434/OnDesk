@@ -10,11 +10,19 @@
   "scripts": {
     "dev": "npm run dev -w @ondesk/web",
     "build": "npm run build -w @ondesk/web",
+    "build:cf": "npm run build:cf -w @ondesk/web",
+    "preview:cf": "npm run preview:cf -w @ondesk/web",
+    "deploy": "npm run deploy -w @ondesk/web",
     "test": "npm test -w @ondesk/core",
     "typecheck": "npm run typecheck -w @ondesk/core && npm run typecheck -w @ondesk/web"
   },
   "engines": {
     "node": ">=20"
+  },
+  "overrides": {
+    "next": {
+      "postcss": "8.5.26"
+    }
   },
   "license": "MIT"
 }
