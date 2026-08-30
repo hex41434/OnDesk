@@ -1,4 +1,4 @@
-import { parseHfRepo } from "@ondesk/core";
+import { mapKnownModelQuery, parseHfRepo } from "@ondesk/core";
 import { mapModelQuery, resolveGeminiKey } from "../../../lib/gemini";
 
 export const dynamic = "force-dynamic";
@@ -61,7 +61,7 @@ export async function POST(req: Request) {
   }
 
   const key = resolveGeminiKey(req);
-  let search = query;
+  let search = mapKnownModelQuery(query) ?? query;
   let via: "gemini" | "hub" = "hub";
   let job = null;
 

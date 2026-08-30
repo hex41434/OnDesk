@@ -5,6 +5,7 @@ import {
   enoughFitInfo,
   fit,
   gpus,
+  mapKnownModelQuery,
   models,
   parseHfRepo,
   rankHardware,
@@ -271,7 +272,8 @@ export function ModelTab() {
     setHfLoading(true);
     setHfError(null);
     setHits([]);
-    const local = models.filter((m) => nameHit(m, query)).slice(0, 8);
+    const localQuery = mapKnownModelQuery(query) ?? query;
+    const local = models.filter((m) => nameHit(m, localQuery)).slice(0, 8);
     setCatalogHits(local);
     try {
       const res = await fetch("/api/search-models", {

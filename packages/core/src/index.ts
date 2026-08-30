@@ -5,6 +5,7 @@ export { rank, rankHardware } from "./rank";
 export { matchIntent } from "./intent";
 export type { Intent } from "./intent";
 export { findHardware, hardwareById, matchHostSku } from "./hardware";
+export { mapKnownModelQuery } from "./model-query";
 export { companionFor, companionLine } from "./companion";
 export type { Companion } from "./companion";
 export { enoughFitInfo, modelFromHub, parseHfRepo, sizeFromId } from "./hub";

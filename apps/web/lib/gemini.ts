@@ -1,6 +1,10 @@
-import type { Job } from "@ondesk/core";
+import { mapKnownModelQuery, type Job } from "@ondesk/core";
 
-const GEMINI_MODELS = ["gemini-2.5-flash", "gemini-2.0-flash"];
+const GEMINI_MODELS = [
+  "gemini-3.5-flash-lite",
+  "gemini-3.5-flash",
+  "gemini-2.5-flash",
+];
 
 export const JOBS: Job[] = [
   "vision",
@@ -83,13 +87,17 @@ export async function mapModelQuery(
 The request may be Persian, English, or informal.
 Return JSON only: {"search":"short English Hub query","job":"coding"|null}
 "search" is identifiers/names (Qwen2.5-Coder), not a sentence.
+Map a company to its best-known open model family when that is what the user
+means: Alibaba/Tongyi/DashScope → Qwen, Meta/Facebook → Llama,
+Microsoft → Phi, Google → Gemma.
 "job" is one of: vision, detect, segment, coding, chat, reasoning, tools, embeddings, speech — or null.
 Do not mention VRAM, GB, tok/s, or whether a model fits.
 
 User: ${query}`,
   );
-  const search =
+  const parsedSearch =
     typeof parsed?.search === "string" ? parsed.search.trim() : "";
+  const search = mapKnownModelQuery(query) ?? parsedSearch;
   if (!search) return null;
   const jobRaw = parsed?.job;
   const job =

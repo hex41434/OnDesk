@@ -288,6 +288,30 @@
     "bandwidthGBs": 624
   },
   {
+    "id": "m5-16",
+    "name": "M5 16GB (MacBook)",
+    "maker": "apple",
+    "memoryGb": 16,
+    "memoryKind": "unified",
+    "bandwidthGBs": 153
+  },
+  {
+    "id": "m5-24",
+    "name": "M5 24GB (MacBook)",
+    "maker": "apple",
+    "memoryGb": 24,
+    "memoryKind": "unified",
+    "bandwidthGBs": 153
+  },
+  {
+    "id": "m5-32",
+    "name": "M5 32GB (MacBook)",
+    "maker": "apple",
+    "memoryGb": 32,
+    "memoryKind": "unified",
+    "bandwidthGBs": 153
+  },
+  {
     "id": "m4-16",
     "name": "M4 16GB",
     "maker": "apple",

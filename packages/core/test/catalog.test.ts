@@ -1,5 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { enoughFitInfo, gpus, matchHostSku, models, rank, rankHardware } from "../src/index";
+import {
+  enoughFitInfo,
+  findHardware,
+  gpus,
+  mapKnownModelQuery,
+  matchHostSku,
+  models,
+  rank,
+  rankHardware,
+} from "../src/index";
 
 describe("catalog", () => {
   it("catalog cards have enough info to score", () => {
@@ -42,6 +51,18 @@ describe("catalog", () => {
 
   it("matchHostSku maps Apple M4 16GB", () => {
     expect(matchHostSku("Apple M4", 16, gpus)?.id).toBe("m4-16");
+  });
+
+  it("finds current M5 MacBook configurations", () => {
+    const hits = findHardware("MacBook M5", gpus);
+    expect(hits.map((hw) => hw.id)).toEqual(
+      expect.arrayContaining(["m5-16", "m5-24", "m5-32"]),
+    );
+  });
+
+  it("maps a model company to its Hub family without Gemini", () => {
+    expect(mapKnownModelQuery("Alibaba")).toBe("Qwen");
+    expect(mapKnownModelQuery("علی بابا")).toBe("Qwen");
   });
 
   it("Qwen2.5 7B has matching hardware", () => {
