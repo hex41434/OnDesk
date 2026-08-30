@@ -4,8 +4,6 @@
 
 ![OnDesk matching local AI models to desktop hardware](docs/ondesk-hero.png)
 
-**Live demo:** [ondesk.webmap-directory.workers.dev](https://ondesk.webmap-directory.workers.dev)
-
 OnDesk helps you choose local AI hardware with fewer guesses. Pick a GPU or
 Apple Silicon configuration to see which models fit, or paste a Hugging Face
 repository to find the hardware that can run it.
@@ -13,6 +11,37 @@ repository to find the hardware that can run it.
 Every result shows the memory estimate, best available quantization, fit band,
 and estimated generation speed. The calculations are deterministic and visible
 instead of being delegated to an AI model.
+
+## Try OnDesk
+
+### Use the web app
+
+Open the [live demo](https://ondesk.webmap-directory.workers.dev) and test
+OnDesk immediately—no installation or account required. Choose your hardware
+from the catalog, then explore compatible models or search in the opposite
+direction from model to hardware.
+
+### Run it on your device
+
+Running OnDesk locally enables host hardware detection in addition to the full
+web experience. Requirements: Node.js 20 or newer.
+
+```bash
+git clone https://github.com/hex41434/OnDesk.git
+cd OnDesk
+npm install
+npm test
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+Other useful commands:
+
+```bash
+npm run typecheck
+npm run build
+```
 
 ## What OnDesk does
 
@@ -29,27 +58,6 @@ instead of being delegated to an AI model.
 - **Optional smart search:** Gemini improves the search experience by translating
   informal or multilingual queries into hardware and Hugging Face search terms.
   It is not required and never decides the fit score.
-
-## Quick start
-
-Requirements: Node.js 20 or newer.
-
-```bash
-git clone https://github.com/hex41434/OnDesk.git
-cd ondesk
-npm install
-npm test
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000).
-
-Other useful commands:
-
-```bash
-npm run typecheck
-npm run build
-```
 
 ## Deploy to Cloudflare Workers
 
