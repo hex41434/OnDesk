@@ -25,9 +25,10 @@ export default function SettingsPage() {
     <article className="prose">
       <h1>Settings</h1>
       <p>
-        Gemini is only for turning a sentence into a search string (hardware SKU
-        or Hub keywords). Fit bands and tok/s never go through Google. The key
-        stays in this browser, or in{" "}
+        Gemini is optional. It only improves the search experience by turning a
+        sentence into hardware SKU or Hub keywords. Local catalog matching and
+        direct Hub search still work without it; fit bands and tok/s never go
+        through Google. The key stays in this browser, or in{" "}
         <code>apps/web/.env.local</code> as <code>GEMINI_API_KEY</code> (restart
         dev after that).
       </p>

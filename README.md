@@ -22,16 +22,16 @@ instead of being delegated to an AI model.
   modality memory, and usable device memory.
 - **Practical filters:** narrow results by task, model name, hardware name,
   memory use, fit quality, quantization, or estimated speed.
-- **Optional smart search:** use Gemini to translate informal or multilingual
-  queries into hardware and Hugging Face search terms. Gemini never decides the
-  fit score.
+- **Optional smart search:** Gemini improves the search experience by translating
+  informal or multilingual queries into hardware and Hugging Face search terms.
+  It is not required and never decides the fit score.
 
 ## Quick start
 
 Requirements: Node.js 20 or newer.
 
 ```bash
-git clone https://github.com/hex41434/ondesk.git
+git clone https://github.com/hex41434/OnDesk.git
 cd ondesk
 npm install
 npm test
@@ -49,8 +49,10 @@ npm run build
 
 ## Optional Gemini search
 
-OnDesk works without Gemini. To enable natural-language search, either save a
-Gemini API key on the **Settings** page or create `apps/web/.env.local`:
+OnDesk works without Gemini: local catalog matching and direct Hugging Face Hub
+search remain available. Gemini is an optional search-quality enhancement for
+natural-language queries. To enable it, either save a Gemini API key on the
+**Settings** page or create `apps/web/.env.local`:
 
 ```bash
 GEMINI_API_KEY=your_key_here
